@@ -8,28 +8,22 @@
 import Foundation
 import CoreGraphics
 import UIKit
+import PureLayout
 
 class GraphCanvasView: UIView {
+    var dividerView: UIView!
     var graph = Graph()
     private var tempEdge: Edge?
     private var startingVertex: Vertex?
 
-    // Inicijalizacija i osnovne postavke
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        self.addGestureRecognizer(tapGesture)
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
-        self.addGestureRecognizer(longPressGesture)
-
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-        self.addGestureRecognizer(panGesture)
-        // Dodajte ostale gesture recognizere za crtanje bridova
+        setupCanvas()
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
+        setupCanvas()
     }
     
     override func draw(_ rect: CGRect) {
@@ -74,7 +68,7 @@ class GraphCanvasView: UIView {
             setNeedsDisplay()
         case .ended:
             if let startVertex = startingVertex, let endVertex = vertexNearPoint(location), startVertex.id != endVertex.id {
-                graph.addEdge(from: startVertex, to: endVertex) // Pretpostavlja se da metoda prihvaća dva Vertex objekta.
+                graph.addEdge(from: startVertex, to: endVertex)
                 tempEdge = nil
             }
             startingVertex = nil
@@ -107,6 +101,33 @@ class GraphCanvasView: UIView {
         return graph.vertices.first { vertex in
             return (vertex.position - point).magnitude <= touchRadius
         }
+    }
+    
+    private func setupCanvas() {
+        self.backgroundColor = UIColor.white
+        
+        setupDivider()
+        setupGestureRecognizers()
+    }
+    
+    private func setupDivider() {
+        dividerView = UIView.newAutoLayout()
+        dividerView.backgroundColor = UIColor.lightGray
+        addSubview(dividerView)
+        
+        dividerView.autoSetDimension(.height, toSize: 10)
+        dividerView.autoPinEdge(toSuperviewEdge: .left)
+        dividerView.autoPinEdge(toSuperviewEdge: .right)
+        dividerView.autoAlignAxis(toSuperviewAxis: .horizontal)
+    }
+    
+    private func setupGestureRecognizers() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        self.addGestureRecognizer(tapGesture)
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
+        self.addGestureRecognizer(longPressGesture)
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        self.addGestureRecognizer(panGesture)
     }
 }
 
