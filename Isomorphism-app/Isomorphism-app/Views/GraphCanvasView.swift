@@ -12,9 +12,11 @@ import PureLayout
 
 class GraphCanvasView: UIView {
     var dividerView: UIView!
-    var graph = Graph()
+    var graphOne = Graph()
+    var graphTwo = Graph()
     private var tempEdge: Edge?
     private var startingVertex: Vertex?
+    private var editingGraphOne = true
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,12 +30,20 @@ class GraphCanvasView: UIView {
     
     override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
-
-        for edge in graph.edges {
+        
+        for edge in graphOne.edges {
             drawEdge(edge, in: context)
         }
-
-        for vertex in graph.vertices {
+        
+        for vertex in graphOne.vertices {
+            drawVertex(vertex, in: context)
+        }
+        
+        for edge in graphTwo.edges {
+            drawEdge(edge, in: context)
+        }
+        
+        for vertex in graphTwo.vertices {
             drawVertex(vertex, in: context)
         }
         
@@ -44,7 +54,14 @@ class GraphCanvasView: UIView {
 
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
         let location = gesture.location(in: self)
-        graph.addVertex(position: location)
+        // Odlučite koji graf treba ažurirati ovisno o lokaciji tapkanja
+        if location.y < self.bounds.midY {
+            editingGraphOne = true
+            graphOne.addVertex(position: location)
+        } else {
+            editingGraphOne = false
+            graphTwo.addVertex(position: location)
+        }
         setNeedsDisplay() // Osvježava prikaz
     }
     
@@ -59,16 +76,25 @@ class GraphCanvasView: UIView {
         let location = gesture.location(in: self)
         switch gesture.state {
         case .began:
+            // Provjeravamo postoji li već odabrani početni vrh
             if startingVertex == nil {
                 startingVertex = vertexNearPoint(location)
             }
         case .changed:
-            guard let startVertex = startingVertex else { return }
-            tempEdge = Edge(from: startVertex, to: Vertex(id: -1, position: location)) // Privremeni brid
-            setNeedsDisplay()
+            // Ako postoji početni vrh, stvaramo privremeni brid
+            if let startVertex = startingVertex {
+                tempEdge = Edge(from: startVertex, to: Vertex(id: -1, position: location))
+                setNeedsDisplay()
+            }
         case .ended:
+            // Na kraju poteza, provjeravamo postoji li krajnji vrh blizu lokacije
             if let startVertex = startingVertex, let endVertex = vertexNearPoint(location), startVertex.id != endVertex.id {
-                graph.addEdge(from: startVertex, to: endVertex)
+                // Ovisno o tome koji se graf uređuje, dodajemo brid u odgovarajući graf
+                if editingGraphOne {
+                    graphOne.addEdge(from: startVertex, to: endVertex)
+                } else {
+                    graphTwo.addEdge(from: startVertex, to: endVertex)
+                }
                 tempEdge = nil
             }
             startingVertex = nil
@@ -98,7 +124,9 @@ class GraphCanvasView: UIView {
     
     private func vertexNearPoint(_ point: CGPoint) -> Vertex? {
         let touchRadius: CGFloat = 20.0
-        return graph.vertices.first { vertex in
+        let vertices = editingGraphOne ? graphOne.vertices : graphTwo.vertices
+        
+        return vertices.first { vertex in
             return (vertex.position - point).magnitude <= touchRadius
         }
     }
@@ -124,8 +152,7 @@ class GraphCanvasView: UIView {
     private func setupGestureRecognizers() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         self.addGestureRecognizer(tapGesture)
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
-        self.addGestureRecognizer(longPressGesture)
+        
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         self.addGestureRecognizer(panGesture)
     }
