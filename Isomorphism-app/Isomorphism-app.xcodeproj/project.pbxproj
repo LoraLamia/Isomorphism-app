@@ -18,6 +18,7 @@
 		35B93D812B3C1E880085411F /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D802B3C1E880085411F /* Graph.swift */; };
 		35B93D832B3C1ED30085411F /* GraphCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D822B3C1ED30085411F /* GraphCanvasView.swift */; };
 		35B93D862B3C1F150085411F /* GraphIsomorphismChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D852B3C1F150085411F /* GraphIsomorphismChecker.swift */; };
+		35B93D892B3C79370085411F /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D882B3C79370085411F /* WelcomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		35B93D802B3C1E880085411F /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		35B93D822B3C1ED30085411F /* GraphCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCanvasView.swift; sourceTree = "<group>"; };
 		35B93D852B3C1F150085411F /* GraphIsomorphismChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphIsomorphismChecker.swift; sourceTree = "<group>"; };
+		35B93D882B3C79370085411F /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 		35B93D5B2B3C11260085411F /* Isomorphism-app */ = {
 			isa = PBXGroup;
 			children = (
+				35B93D872B3C79110085411F /* Controllers */,
 				35B93D792B3C1DD50085411F /* Algorithms */,
 				35B93D762B3C1D830085411F /* Views */,
 				35B93D732B3C1BE50085411F /* Models */,
@@ -103,6 +106,14 @@
 				35B93D852B3C1F150085411F /* GraphIsomorphismChecker.swift */,
 			);
 			path = Algorithms;
+			sourceTree = "<group>";
+		};
+		35B93D872B3C79110085411F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				35B93D882B3C79370085411F /* WelcomeViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35B93D892B3C79370085411F /* WelcomeViewController.swift in Sources */,
 				35B93D612B3C11260085411F /* ViewController.swift in Sources */,
 				35B93D862B3C1F150085411F /* GraphIsomorphismChecker.swift in Sources */,
 				35B93D832B3C1ED30085411F /* GraphCanvasView.swift in Sources */,
