@@ -6,12 +6,18 @@
 //
 
 import UIKit
+import PureLayout
 
 class ViewController: UIViewController {
+    let graphCanvasView = GraphCanvasView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        view.addSubview(graphCanvasView)
+                
+        graphCanvasView.translatesAutoresizingMaskIntoConstraints = false
+        graphCanvasView.autoPinEdgesToSuperviewEdges()
+
         view.backgroundColor = .yellow
     }
 

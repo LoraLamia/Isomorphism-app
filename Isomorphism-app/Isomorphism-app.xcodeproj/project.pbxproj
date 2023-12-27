@@ -12,6 +12,12 @@
 		35B93D612B3C11260085411F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D602B3C11260085411F /* ViewController.swift */; };
 		35B93D662B3C11280085411F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35B93D652B3C11280085411F /* Assets.xcassets */; };
 		35B93D692B3C11280085411F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35B93D672B3C11280085411F /* LaunchScreen.storyboard */; };
+		35B93D722B3C1A3E0085411F /* PureLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 35B93D712B3C1A3E0085411F /* PureLayout */; };
+		35B93D7B2B3C1DFF0085411F /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D7A2B3C1DFF0085411F /* Vertex.swift */; };
+		35B93D7D2B3C1E0A0085411F /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D7C2B3C1E0A0085411F /* Edge.swift */; };
+		35B93D812B3C1E880085411F /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D802B3C1E880085411F /* Graph.swift */; };
+		35B93D832B3C1ED30085411F /* GraphCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D822B3C1ED30085411F /* GraphCanvasView.swift */; };
+		35B93D862B3C1F150085411F /* GraphIsomorphismChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D852B3C1F150085411F /* GraphIsomorphismChecker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +28,11 @@
 		35B93D652B3C11280085411F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35B93D682B3C11280085411F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		35B93D6A2B3C11280085411F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		35B93D7A2B3C1DFF0085411F /* Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
+		35B93D7C2B3C1E0A0085411F /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
+		35B93D802B3C1E880085411F /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
+		35B93D822B3C1ED30085411F /* GraphCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCanvasView.swift; sourceTree = "<group>"; };
+		35B93D852B3C1F150085411F /* GraphIsomorphismChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphIsomorphismChecker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35B93D722B3C1A3E0085411F /* PureLayout in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +66,9 @@
 		35B93D5B2B3C11260085411F /* Isomorphism-app */ = {
 			isa = PBXGroup;
 			children = (
+				35B93D792B3C1DD50085411F /* Algorithms */,
+				35B93D762B3C1D830085411F /* Views */,
+				35B93D732B3C1BE50085411F /* Models */,
 				35B93D5C2B3C11260085411F /* AppDelegate.swift */,
 				35B93D5E2B3C11260085411F /* SceneDelegate.swift */,
 				35B93D602B3C11260085411F /* ViewController.swift */,
@@ -62,6 +77,32 @@
 				35B93D6A2B3C11280085411F /* Info.plist */,
 			);
 			path = "Isomorphism-app";
+			sourceTree = "<group>";
+		};
+		35B93D732B3C1BE50085411F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				35B93D7A2B3C1DFF0085411F /* Vertex.swift */,
+				35B93D7C2B3C1E0A0085411F /* Edge.swift */,
+				35B93D802B3C1E880085411F /* Graph.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		35B93D762B3C1D830085411F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				35B93D822B3C1ED30085411F /* GraphCanvasView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		35B93D792B3C1DD50085411F /* Algorithms */ = {
+			isa = PBXGroup;
+			children = (
+				35B93D852B3C1F150085411F /* GraphIsomorphismChecker.swift */,
+			);
+			path = Algorithms;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -80,6 +121,9 @@
 			dependencies = (
 			);
 			name = "Isomorphism-app";
+			packageProductDependencies = (
+				35B93D712B3C1A3E0085411F /* PureLayout */,
+			);
 			productName = "Isomorphism-app";
 			productReference = 35B93D592B3C11260085411F /* Isomorphism-app.app */;
 			productType = "com.apple.product-type.application";
@@ -108,6 +152,9 @@
 				Base,
 			);
 			mainGroup = 35B93D502B3C11260085411F;
+			packageReferences = (
+				35B93D702B3C1A3E0085411F /* XCRemoteSwiftPackageReference "PureLayout" */,
+			);
 			productRefGroup = 35B93D5A2B3C11260085411F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -135,8 +182,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				35B93D612B3C11260085411F /* ViewController.swift in Sources */,
+				35B93D862B3C1F150085411F /* GraphIsomorphismChecker.swift in Sources */,
+				35B93D832B3C1ED30085411F /* GraphCanvasView.swift in Sources */,
+				35B93D7D2B3C1E0A0085411F /* Edge.swift in Sources */,
+				35B93D812B3C1E880085411F /* Graph.swift in Sources */,
 				35B93D5D2B3C11260085411F /* AppDelegate.swift in Sources */,
 				35B93D5F2B3C11260085411F /* SceneDelegate.swift in Sources */,
+				35B93D7B2B3C1DFF0085411F /* Vertex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +346,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Lora-Zubic.Isomorphism-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -321,6 +376,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Lora-Zubic.Isomorphism-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -349,6 +407,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		35B93D702B3C1A3E0085411F /* XCRemoteSwiftPackageReference "PureLayout" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/PureLayout/PureLayout.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.9;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		35B93D712B3C1A3E0085411F /* PureLayout */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 35B93D702B3C1A3E0085411F /* XCRemoteSwiftPackageReference "PureLayout" */;
+			productName = PureLayout;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 35B93D512B3C11260085411F /* Project object */;
 }
