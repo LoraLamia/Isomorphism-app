@@ -4,9 +4,9 @@ import UIKit
 import PureLayout
 
 class GraphCanvasView: UIView {
-    var dividerView: UIView!
     var graphOne = Graph()
     var graphTwo = Graph()
+    private var dividerView = UIView()
     private var tempEdge: Edge?
     private var startingVertex: Vertex?
     private var editingGraphOne = true
@@ -131,7 +131,6 @@ class GraphCanvasView: UIView {
     }
     
     private func setupDivider() {
-        dividerView = UIView()
         dividerView.backgroundColor = UIColor.lightGray
         addSubview(dividerView)
         
