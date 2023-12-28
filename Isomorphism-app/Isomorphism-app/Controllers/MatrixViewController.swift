@@ -10,8 +10,8 @@ class MatrixViewController: UIViewController {
     var generateButton: UIButton!
     var processButton: UIButton!
     
-    var graphOne = Graph()
-    var graphTwo = Graph()
+    var graphOne: Graph!
+    var graphTwo: Graph!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -157,6 +157,55 @@ class MatrixViewController: UIViewController {
     }
     
     @objc func processInputMatrices() {
+        guard let sizeOne = matrixSizeFieldOne.text.flatMap(Int.init),
+              let sizeTwo = matrixSizeFieldTwo.text.flatMap(Int.init),
+              inputMatrixViewOne.subviews.count == sizeOne * sizeOne,
+              inputMatrixViewTwo.subviews.count == sizeTwo * sizeTwo else {
+            return
+        }
         
+        var adjacencyMatrixOne = parseMatrix(from: inputMatrixViewOne, size: sizeOne, startingTag: 100)
+        var adjacencyMatrixTwo = parseMatrix(from: inputMatrixViewTwo, size: sizeTwo, startingTag: 200)
+        
+        graphOne = createGraph(from: adjacencyMatrixOne)
+        graphTwo = createGraph(from: adjacencyMatrixTwo)
+        
+    }
+    
+    func parseMatrix(from matrixView: UIView, size: Int, startingTag: Int) -> [[Int]] {
+        var matrix = [[Int]](repeating: [Int](repeating: 0, count: size), count: size)
+        for i in 0..<size {
+            for j in 0..<size {
+                let tag = (i * size) + j + startingTag
+                if let textField = matrixView.viewWithTag(tag) as? UITextField,
+                   let text = textField.text,
+                   let value = Int(text) {
+                    matrix[i][j] = value
+                }
+            }
+        }
+        return matrix
+    }
+    
+    func createGraph(from adjacencyMatrix: [[Int]]) -> Graph {
+        let graph = Graph()
+        let vertexCount = adjacencyMatrix.count
+        
+        // Add vertices
+        for id in 0..<vertexCount {
+            let vertex = Vertex(id: id, position: CGPoint.zero)
+            graph.addVertex(position: CGPoint(x: 0, y: 0))
+        }
+        
+        // Add edges based on adjacency matrix
+        for i in 0..<vertexCount {
+            for j in 0..<vertexCount {
+                if adjacencyMatrix[i][j] == 1 && i != j { // Check for edge and avoid self-loops
+                    graph.addEdge(from: graph.vertices[i], to: graph.vertices[j])
+                }
+            }
+        }
+        
+        return graph
     }
 }
