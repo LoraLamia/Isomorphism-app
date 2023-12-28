@@ -10,7 +10,7 @@
 		35B4E4A52B3D847300659F22 /* MatrixViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4E4A42B3D847300659F22 /* MatrixViewController.swift */; };
 		35B93D5D2B3C11260085411F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D5C2B3C11260085411F /* AppDelegate.swift */; };
 		35B93D5F2B3C11260085411F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D5E2B3C11260085411F /* SceneDelegate.swift */; };
-		35B93D612B3C11260085411F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D602B3C11260085411F /* ViewController.swift */; };
+		35B93D612B3C11260085411F /* DrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D602B3C11260085411F /* DrawViewController.swift */; };
 		35B93D662B3C11280085411F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35B93D652B3C11280085411F /* Assets.xcassets */; };
 		35B93D692B3C11280085411F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35B93D672B3C11280085411F /* LaunchScreen.storyboard */; };
 		35B93D722B3C1A3E0085411F /* PureLayout in Frameworks */ = {isa = PBXBuildFile; productRef = 35B93D712B3C1A3E0085411F /* PureLayout */; };
@@ -27,7 +27,7 @@
 		35B93D592B3C11260085411F /* Isomorphism-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Isomorphism-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35B93D5C2B3C11260085411F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35B93D5E2B3C11260085411F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		35B93D602B3C11260085411F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		35B93D602B3C11260085411F /* DrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawViewController.swift; sourceTree = "<group>"; };
 		35B93D652B3C11280085411F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35B93D682B3C11280085411F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		35B93D6A2B3C11280085411F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 		35B93D872B3C79110085411F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				35B93D602B3C11260085411F /* ViewController.swift */,
+				35B93D602B3C11260085411F /* DrawViewController.swift */,
 				35B93D882B3C79370085411F /* WelcomeViewController.swift */,
 				35B4E4A42B3D847300659F22 /* MatrixViewController.swift */,
 			);
@@ -196,7 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				35B93D892B3C79370085411F /* WelcomeViewController.swift in Sources */,
-				35B93D612B3C11260085411F /* ViewController.swift in Sources */,
+				35B93D612B3C11260085411F /* DrawViewController.swift in Sources */,
 				35B93D862B3C1F150085411F /* GraphIsomorphismChecker.swift in Sources */,
 				35B93D832B3C1ED30085411F /* GraphCanvasView.swift in Sources */,
 				35B93D7D2B3C1E0A0085411F /* Edge.swift in Sources */,

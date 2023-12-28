@@ -1,7 +1,7 @@
 import UIKit
 import PureLayout
 
-class ViewController: UIViewController {
+class DrawViewController: UIViewController {
     var graphCanvasView: GraphCanvasView!
     var checkButton: UIButton!
     
@@ -15,12 +15,18 @@ class ViewController: UIViewController {
         graphCanvasView = GraphCanvasView()
         view.addSubview(graphCanvasView)
         
+        view.backgroundColor = UIColor.white
         checkButton = UIButton()
-        checkButton.setTitle("PROVJERI", for: .normal)
+        checkButton.setTitle("Are isomorphic?", for: .normal)
         checkButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         checkButton.backgroundColor = UIColor.systemBlue
         checkButton.tintColor = UIColor.white
-        checkButton.layer.cornerRadius = 8
+        checkButton.layer.cornerRadius = 10
+        checkButton.layer.shadowColor = UIColor.black.cgColor
+        checkButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        checkButton.layer.shadowRadius = 5
+        checkButton.layer.shadowOpacity = 0.5
+        checkButton.layer.masksToBounds = false
         view.addSubview(checkButton)
         checkButton.addTarget(self, action: #selector(checkIsomorphism), for: .touchUpInside)
     }
@@ -29,7 +35,7 @@ class ViewController: UIViewController {
         graphCanvasView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0))
         
         checkButton.autoAlignAxis(toSuperviewAxis: .vertical)
-        checkButton.autoPinEdge(.top, to: .bottom, of: graphCanvasView, withOffset: 20)
+        checkButton.autoPinEdge(.top, to: .bottom, of: graphCanvasView)
         checkButton.autoSetDimensions(to: CGSize(width: 200, height: 50))
     }
     

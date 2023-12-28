@@ -10,6 +10,9 @@ class GraphCanvasView: UIView {
     private var tempEdge: Edge?
     private var startingVertex: Vertex?
     private var editingGraphOne = true
+    private var drawHereLabelTop = UILabel()
+    private var drawHereLabelBottom = UILabel()
+
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,6 +48,9 @@ class GraphCanvasView: UIView {
         if let tempEdge = tempEdge {
             drawEdge(tempEdge, in: context)
         }
+        
+        drawHereLabelTop.isHidden = !graphOne.vertices.isEmpty
+        drawHereLabelBottom.isHidden = !graphTwo.vertices.isEmpty
     }
 
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
@@ -128,6 +134,17 @@ class GraphCanvasView: UIView {
         
         setupDivider()
         setupGestureRecognizers()
+        setupLabels()
+        
+        drawHereLabelTop.autoPinEdge(toSuperviewEdge: .top)
+        drawHereLabelTop.autoPinEdge(toSuperviewEdge: .leading)
+        drawHereLabelTop.autoPinEdge(toSuperviewEdge: .trailing)
+        drawHereLabelTop.autoPinEdge(.bottom, to: .top, of: dividerView)
+        
+        drawHereLabelBottom.autoPinEdge(.top, to: .bottom, of: dividerView)
+        drawHereLabelBottom.autoPinEdge(toSuperviewEdge: .leading)
+        drawHereLabelBottom.autoPinEdge(toSuperviewEdge: .trailing)
+        drawHereLabelBottom.autoPinEdge(toSuperviewEdge: .bottom)
     }
     
     private func setupDivider() {
@@ -138,6 +155,22 @@ class GraphCanvasView: UIView {
         dividerView.autoPinEdge(toSuperviewEdge: .left)
         dividerView.autoPinEdge(toSuperviewEdge: .right)
         dividerView.autoAlignAxis(toSuperviewAxis: .horizontal)
+    }
+    
+    private func setupLabels() {
+        drawHereLabelTop.text = "Draw here"
+        drawHereLabelTop.textAlignment = .center
+        drawHereLabelTop.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
+        drawHereLabelTop.font = UIFont.boldSystemFont(ofSize: 50)
+        drawHereLabelTop.numberOfLines = 0
+        addSubview(drawHereLabelTop)
+
+        drawHereLabelBottom.text = "Draw here"
+        drawHereLabelBottom.textAlignment = .center
+        drawHereLabelBottom.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
+        drawHereLabelBottom.font = UIFont.boldSystemFont(ofSize: 50)
+        drawHereLabelBottom.numberOfLines = 0
+        addSubview(drawHereLabelBottom)
     }
     
     private func setupGestureRecognizers() {
