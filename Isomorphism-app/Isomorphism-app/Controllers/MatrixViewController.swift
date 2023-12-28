@@ -53,7 +53,7 @@ class MatrixViewController: UIViewController {
         generateButton.autoSetDimension(.height, toSize: 50)
     }
     
-    func createMatrixSizeField(placeholder: String) -> UITextField {
+    private func createMatrixSizeField(placeholder: String) -> UITextField {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.placeholder = placeholder
@@ -66,7 +66,6 @@ class MatrixViewController: UIViewController {
               let sizeOne = Int(sizeOneText),
               let sizeTwoText = matrixSizeFieldTwo.text,
               let sizeTwo = Int(sizeTwoText) else {
-            // Handle error: Show alert or message to the user
             return
         }
         
@@ -164,8 +163,8 @@ class MatrixViewController: UIViewController {
             return
         }
         
-        var adjacencyMatrixOne = parseMatrix(from: inputMatrixViewOne, size: sizeOne, startingTag: 100)
-        var adjacencyMatrixTwo = parseMatrix(from: inputMatrixViewTwo, size: sizeTwo, startingTag: 200)
+        let adjacencyMatrixOne = parseMatrix(from: inputMatrixViewOne, size: sizeOne, startingTag: 100)
+        let adjacencyMatrixTwo = parseMatrix(from: inputMatrixViewTwo, size: sizeTwo, startingTag: 200)
         
         graphOne = createGraph(from: adjacencyMatrixOne)
         graphTwo = createGraph(from: adjacencyMatrixTwo)
