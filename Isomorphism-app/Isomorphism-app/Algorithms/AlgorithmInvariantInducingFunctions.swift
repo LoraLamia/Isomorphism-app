@@ -7,7 +7,10 @@ struct AlgorithmInvariantInducingFunctions {
     
     func checkForIsomorphism() -> Bool {
         
-        getPartitions()
+       
+        
+        
+        
         
         return false
     }
@@ -15,43 +18,18 @@ struct AlgorithmInvariantInducingFunctions {
     
     func getPartitions() -> Int {
         
-        var X0G1: [[Vertex]] = []
-        var X0G2: [[Vertex]] = []
+        //usporedi X[0]
         
-        var X1G1: [[Vertex]] = []
-        var X1G2: [[Vertex]] = []
+        graphOne.X1()
+        graphTwo.X1()
         
+        //usporedi X[1]
         
+        graphOne.X2()
+        graphTwo.X2()
         
-        var X2G1Dictionary: [Int: [Vertex]] = [:]
-        var X2G2Dictionary: [Int: [Vertex]] = [:]
-        
-        var X2G1: [[Vertex]] = []
-        var X2G2: [[Vertex]] = []
-        
-        
-        
+        //usporedi X[2]
         
         return 1
     }
-    
-    
-    static func D1Full() -> [[Vertex]] {
-        return []
-    }
-    
-    static func D1() -> Int {
-        return 0
-    }
-    
-    static func D2Full() -> [[Vertex]] {
-        return []
-    }
-    
-    static func D2() -> [Int] {
-        return []
-    }
-    
-    
-    
 }

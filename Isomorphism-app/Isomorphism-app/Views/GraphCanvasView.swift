@@ -51,9 +51,10 @@ class GraphCanvasView: UIView {
         drawHereLabelBottom.isHidden = !graphTwo.vertices.isEmpty
     }
 
+    //obrada tap-a
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
         let location = gesture.location(in: self)
-        // Odlučite koji graf treba ažurirati ovisno o lokaciji tapkanja
+        //odluka koji graf treba azurirati ovisno o lokaciji tap-a
         if location.y < self.bounds.midY {
             editingGraphOne = true
             graphOne.addVertex(position: location)
@@ -61,29 +62,29 @@ class GraphCanvasView: UIView {
             editingGraphOne = false
             graphTwo.addVertex(position: location)
         }
-        setNeedsDisplay() // Osvježava prikaz
+        setNeedsDisplay() //reload
     }
 
-    // Obrada potezanja za crtanje bridova
+    //obrada potezanja bridova (pan)
     @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
         
         let location = gesture.location(in: self)
         switch gesture.state {
         case .began:
-            // Provjeravamo postoji li već odabrani početni vrh
+            //postoji li odabrani pocetni vrh
             if startingVertex == nil {
                 startingVertex = vertexNearPoint(location)
             }
         case .changed:
-            // Ako postoji početni vrh, stvaramo privremeni brid
+            //ako postoji pocetni vrh, stvaramo privremeni brid
             if let startVertex = startingVertex {
                 tempEdge = Edge(from: startVertex, to: Vertex(id: -1, position: location))
                 setNeedsDisplay()
             }
         case .ended:
-            // Na kraju poteza, provjeravamo postoji li krajnji vrh blizu lokacije
+            //provjera postoji li vrh blizu lokacije
             if let startVertex = startingVertex, let endVertex = vertexNearPoint(location), startVertex.id != endVertex.id {
-                // Ovisno o tome koji se graf uređuje, dodajemo brid u odgovarajući graf
+                //dodavanje brida u onaj graf koji se ureduje
                 if editingGraphOne {
                     graphOne.addEdge(from: startVertex, to: endVertex)
                 } else {

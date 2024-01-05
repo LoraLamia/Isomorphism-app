@@ -36,7 +36,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      Edge(from: vertex6, to: vertex4)]
         graf.edges = edges
 
-        print(graf.X1())
+        print(graf.X[0])
+        graf.X1()
+        print(graf.X[1])
+        graf.X2()
+        for vertex in graf.vertices {
+            print(graf.D2(vertex: vertex))
+        }
+        print(graf.X[2])
         
         
         return true
