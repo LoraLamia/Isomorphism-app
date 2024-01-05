@@ -4,7 +4,6 @@ class Graph {
     var vertices: [Vertex] = []
     var edges: [Edge] = []
     
-    
     func addVertex(position: CGPoint) {
         let newVertex = Vertex(id: vertices.count, position: position)
         vertices.append(newVertex)
@@ -13,6 +12,28 @@ class Graph {
     func addEdge(from: Vertex, to: Vertex) {
         let newEdge = Edge(from: from, to: to)
         edges.append(newEdge)
+    }
+    
+    //radi, testirano
+    func X1() -> [[Vertex]] {
+        var dict: [Int: [Vertex]] = [:]
+        
+        for vertex in vertices {
+            let res = D1(vertex: vertex)
+            if(dict[res] == nil) {
+                dict[res] = [vertex]
+            } else {
+                var temp = dict[res]
+                temp?.append(vertex)
+                dict[res] = temp
+            }
+        }
+        var res: [[Vertex]] = []
+        let keys = dict.keys.sorted()
+        for value in keys {
+            res.append(dict[value]!)
+        }
+        return res
     }
     
     //radi, testirano, oblik: stupanj vrha

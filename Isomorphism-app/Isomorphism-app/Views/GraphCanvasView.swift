@@ -27,8 +27,6 @@ class GraphCanvasView: UIView {
     override func draw(_ rect: CGRect) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
         
-        print("DEBUGGGG - Draw")
-        
         for edge in graphOne.edges {
             drawEdge(edge, in: context)
         }
@@ -54,7 +52,6 @@ class GraphCanvasView: UIView {
     }
 
     @objc func handleTap(_ gesture: UITapGestureRecognizer) {
-        print("DEBUGGGG - TAP")
         let location = gesture.location(in: self)
         // Odlučite koji graf treba ažurirati ovisno o lokaciji tapkanja
         if location.y < self.bounds.midY {
@@ -71,7 +68,6 @@ class GraphCanvasView: UIView {
     @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
         
         let location = gesture.location(in: self)
-        print("DEBUGGGG - Pan locatioN: \(location)")
         switch gesture.state {
         case .began:
             // Provjeravamo postoji li već odabrani početni vrh

@@ -40,10 +40,8 @@ class DrawViewController: UIViewController {
     }
     
     @objc func checkIsomorphism() {
-        for vertex in graphCanvasView.graphOne.vertices {
-            print("Vrh \(vertex.id)")
-            print(graphCanvasView.graphOne.D2(vertex: vertex))
-        }
+        
+        print(graphCanvasView.graphOne.X1())
     }
     
     
