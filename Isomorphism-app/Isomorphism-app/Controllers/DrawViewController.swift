@@ -40,8 +40,7 @@ class DrawViewController: UIViewController {
     }
     
     @objc func checkIsomorphism() {
-        
-        print(graphCanvasView.graphOne.X1())
+        print("SAD")
     }
     
     

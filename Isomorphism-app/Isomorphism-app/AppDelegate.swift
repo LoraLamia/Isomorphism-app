@@ -9,41 +9,73 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         
-        let graf = Graph()
-        let vertex0 = Vertex(id: 0, position: CGPoint(x: 93, y: 179))
-        let vertex1 = Vertex(id: 1, position: CGPoint(x: 59, y: 237))
-        let vertex2 = Vertex(id: 2, position: CGPoint(x: 111, y: 280))
-        let vertex3 = Vertex(id: 3, position: CGPoint(x: 180, y: 324))
-        let vertex4 = Vertex(id: 4, position: CGPoint(x: 313, y: 159))
-        let vertex5 = Vertex(id: 5, position: CGPoint(x: 308, y: 268))
-        let vertex6 = Vertex(id: 6, position: CGPoint(x: 171, y: 157))
+        let graf1 = Graph()
+        let vertex0 = Vertex(id: 0, position: CGPoint(x: 101, y: 150))
+        let vertex1 = Vertex(id: 1, position: CGPoint(x: 182, y: 144))
+        let vertex2 = Vertex(id: 2, position: CGPoint(x: 271, y: 141))
+        let vertex3 = Vertex(id: 3, position: CGPoint(x: 273, y: 216))
+        let vertex4 = Vertex(id: 4, position: CGPoint(x: 181, y: 218))
+        let vertex5 = Vertex(id: 5, position: CGPoint(x: 100, y: 223))
         
         let vertices = [vertex0,
                         vertex1,
                         vertex2,
                         vertex3,
                         vertex4,
-                        vertex5,
-                        vertex6]
-        graf.vertices = vertices
-        let edges = [Edge(from: vertex1, to: vertex0),
-                     Edge(from: vertex0, to: vertex2),
+                        vertex5]
+        graf1.vertices = vertices
+        let edges = [Edge(from: vertex5, to: vertex2),
+                     Edge(from: vertex4, to: vertex2),
+                     Edge(from: vertex5, to: vertex4),
+                     Edge(from: vertex4, to: vertex3),
+                     Edge(from: vertex3, to: vertex1),
+                     Edge(from: vertex1, to: vertex4),
+                     Edge(from: vertex0, to: vertex1),
                      Edge(from: vertex1, to: vertex2),
-                     Edge(from: vertex0, to: vertex6),
-                     Edge(from: vertex0, to: vertex3),
-                     Edge(from: vertex6, to: vertex3),
-                     Edge(from: vertex3, to: vertex5),
-                     Edge(from: vertex6, to: vertex4)]
-        graf.edges = edges
+                     Edge(from: vertex0, to: vertex4)]
+        graf1.edges = edges
 
-        print(graf.X[0])
-        graf.X1()
-        print(graf.X[1])
-        graf.X2()
-        for vertex in graf.vertices {
-            print(graf.D2(vertex: vertex))
-        }
-        print(graf.X[2])
+        print("X[0] za graf 1: \(graf1.X[0])")
+        graf1.X1()
+        print("X[1] za graf 1: \(graf1.X[1])")
+        graf1.X2()
+        print("X[2] za graf 1: \(graf1.X[2])")
+//        for vertex in graf1.vertices {
+//            print(graf1.D2(vertex: vertex))
+//        }
+//        print(graf1.X[2])
+        
+        let graf2 = Graph()
+        let TwoVertex0 = Vertex(id: 0, position: CGPoint(x: 122, y: 553))
+        let TwoVertex1 = Vertex(id: 1, position: CGPoint(x: 182, y: 611))
+        let TwoVertex2 = Vertex(id: 2, position: CGPoint(x: 124, y: 614))
+        let TwoVertex3 = Vertex(id: 3, position: CGPoint(x: 118, y: 479))
+        let TwoVertex4 = Vertex(id: 4, position: CGPoint(x: 180, y: 472))
+        let TwoVertex5 = Vertex(id: 5, position: CGPoint(x: 248, y: 549))
+        
+        let TwoVertices = [TwoVertex0,
+                           TwoVertex1,
+                           TwoVertex2,
+                           TwoVertex3,
+                           TwoVertex4,
+                           TwoVertex5]
+        graf2.vertices = TwoVertices
+        let TwoEdges = [Edge(from: TwoVertex3, to: TwoVertex0),
+                     Edge(from: TwoVertex0, to: TwoVertex2),
+                     Edge(from: TwoVertex3, to: TwoVertex1),
+                     Edge(from: TwoVertex0, to: TwoVertex4),
+                     Edge(from: TwoVertex4, to: TwoVertex5),
+                     Edge(from: TwoVertex5, to: TwoVertex1),
+                     Edge(from: TwoVertex0, to: TwoVertex1),
+                     Edge(from: TwoVertex0, to: TwoVertex5),
+                     Edge(from: TwoVertex2, to: TwoVertex5)]
+        graf2.edges = TwoEdges
+        
+        print("X[0] za graf 2: \(graf2.X[0])")
+        graf2.X1()
+        print("X[1] za graf 2: \(graf2.X[1])")
+        graf2.X2()
+        print("X[2] za graf 2: \(graf2.X[2])")
         
         
         return true

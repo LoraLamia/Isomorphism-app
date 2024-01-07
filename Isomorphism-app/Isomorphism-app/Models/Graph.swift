@@ -41,6 +41,7 @@ class Graph {
         X.append(res)
     }
     
+    //radi, testirano
     func X2() {
         var dict: [[Int]: [Vertex]] = [:]
         for vertex in vertices {
@@ -58,10 +59,24 @@ class Graph {
         
         
         let keys = dict.keys
-        // TODO sort keys ???? Ne pise po cemu ja moram sortirati te arrayeve??
         
+        var myArray: [[Int]] = []
+        for key in keys {
+            myArray.append(key)
+        }
         
-        var sortedKeys = Array(keys)
+        let sortedKeys = myArray.sorted { arr1, arr2 in
+            
+            for index in 0...arr1.count {
+                if arr1[index] > arr2[index] {
+                    return true
+                } else if arr1[index] < arr2[index] {
+                    return false
+                }
+            }
+            return true
+        }
+
         for value in sortedKeys {
             res.append(dict[value]!)
         }

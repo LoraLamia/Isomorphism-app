@@ -3,4 +3,54 @@
    uuid = "F9562724-6CE1-455B-82E2-9B3C83B535FA"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "713A5D67-C3C2-45BA-85CF-257CCECEC9A8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Isomorphism-app/Controllers/DrawViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "checkIsomorphism()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "713A5D67-C3C2-45BA-85CF-257CCECEC9A8 - 164673a2508caf54"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Isomorphism_app.DrawViewController.checkIsomorphism() -&gt; ()"
+                  moduleName = "Isomorphism-app"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lorazubic/Developer/Isomorphism-app/Isomorphism-app/Isomorphism-app/Controllers/DrawViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "55">
+               </Location>
+               <Location
+                  uuid = "713A5D67-C3C2-45BA-85CF-257CCECEC9A8 - 164673a2508caf0b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Isomorphism_app.DrawViewController.checkIsomorphism() -&gt; ()"
+                  moduleName = "Isomorphism-app"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lorazubic/Developer/Isomorphism-app/Isomorphism-app/Isomorphism-app/Controllers/DrawViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "53">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
