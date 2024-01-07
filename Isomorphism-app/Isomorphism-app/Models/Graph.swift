@@ -3,6 +3,8 @@ import Foundation
 class Graph {
     var vertices: [Vertex] = []
     var edges: [Edge] = []
+    var dictX1: [Int: [Vertex]] = [:]
+    var dictX2: [[Int]: [Vertex]] = [:]
     
     lazy var X: [[[Vertex]]] = {
         return [[vertices]]
@@ -32,6 +34,9 @@ class Graph {
                 dict[res] = temp
             }
         }
+        
+        self.dictX1 = dict
+        
         var res: [[Vertex]] = []
         let keys = dict.keys.sorted()
         for value in keys {
@@ -54,6 +59,8 @@ class Graph {
                 dict[res] = temp
             }
         }
+        
+        self.dictX2 = dict
         
         var res: [[Vertex]] = []
         
