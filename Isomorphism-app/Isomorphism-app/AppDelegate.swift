@@ -35,11 +35,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      Edge(from: vertex0, to: vertex4)]
         graf1.edges = edges
 
-        print("X[0] za graf 1: \(graf1.X[0])")
-        graf1.X1()
-        print("X[1] za graf 1: \(graf1.X[1])")
-        graf1.X2()
-        print("X[2] za graf 1: \(graf1.X[2])")
+//        print("X[0] za graf 1: \(graf1.X[0])")
+//        graf1.X1()
+//        print("X[1] za graf 1: \(graf1.X[1])")
+//        graf1.X2()
+//        print("X[2] za graf 1: \(graf1.X[2])")
 //        for vertex in graf1.vertices {
 //            print(graf1.D2(vertex: vertex))
 //        }
@@ -71,14 +71,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      Edge(from: TwoVertex2, to: TwoVertex5)]
         graf2.edges = TwoEdges
         
-        print("X[0] za graf 2: \(graf2.X[0])")
-        graf2.X1()
-        print("X[1] za graf 2: \(graf2.X[1])")
-        graf2.X2()
-        print("X[2] za graf 2: \(graf2.X[2])")
+//        print("X[0] za graf 2: \(graf2.X[0])")
+//        graf2.X1()
+//        print("X[1] za graf 2: \(graf2.X[1])")
+//        graf2.X2()
+//        print("X[2] za graf 2: \(graf2.X[2])")
         
         var alg = AlgorithmInvariantInducingFunctions(graphOne: graf1, graphTwo: graf2)
         alg.getPartitions()
+        print(alg.isomorphic)
         
         
         return true

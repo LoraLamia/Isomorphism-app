@@ -322,5 +322,117 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E708899E-3E82-4807-B3C7-C0B2F60787B9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Isomorphism-app/Algorithms/AlgorithmInvariantInducingFunctions.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "getPartitions()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "23DABAC2-DE26-49B1-8AAA-0AD3BE2FE873"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Isomorphism-app/Algorithms/AlgorithmInvariantInducingFunctions.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "getPartitions()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2D62CDB1-2918-435C-A6E6-9BB006F0717C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Isomorphism-app/Algorithms/AlgorithmInvariantInducingFunctions.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "getPartitions()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5EC427A7-67C5-4F5E-8B12-964821578FB1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Isomorphism-app/Algorithms/AlgorithmInvariantInducingFunctions.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "getPartitions()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1467569F-00FE-4389-A5BF-6B5D3B95230C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Isomorphism-app/Algorithms/AlgorithmInvariantInducingFunctions.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "getPartitions()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1467569F-00FE-4389-A5BF-6B5D3B95230C - 6095d70b038aa772"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Isomorphism_app.AlgorithmInvariantInducingFunctions.getPartitions() -&gt; ()"
+                  moduleName = "Isomorphism-app"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lorazubic/Developer/Isomorphism-app/Isomorphism-app/Isomorphism-app/Algorithms/AlgorithmInvariantInducingFunctions.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "7145">
+               </Location>
+               <Location
+                  uuid = "1467569F-00FE-4389-A5BF-6B5D3B95230C - 6095d70b038aa772"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Isomorphism_app.AlgorithmInvariantInducingFunctions.getPartitions() -&gt; ()"
+                  moduleName = "Isomorphism-app"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/lorazubic/Developer/Isomorphism-app/Isomorphism-app/Isomorphism-app/Algorithms/AlgorithmInvariantInducingFunctions.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "7140">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
