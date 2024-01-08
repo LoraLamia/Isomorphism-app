@@ -203,6 +203,9 @@ class MatrixViewController: UIViewController {
         graphOne = createGraph(from: adjacencyMatrixOne)
         graphTwo = createGraph(from: adjacencyMatrixTwo)
         
+        graphOne.cleanUpDoubleEdges()
+        graphTwo.cleanUpDoubleEdges()
+        
         let alg = AlgorithmInvariantInducingFunctions(graphOne: graphOne, graphTwo: graphTwo)
         
         let message = alg.areIsomorphic() ? "Graphs are isomorphic!" : "Graphs are NOT isomorphic!"

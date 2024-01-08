@@ -133,3 +133,24 @@ class Graph {
     }
     
 }
+
+extension Graph {
+    func cleanUpDoubleEdges() {
+        var onlyGoodEdges: [Edge] = []
+        
+        for edge in edges {
+            var good = true
+            for edge2 in onlyGoodEdges {
+                if((edge2.from.id == edge.from.id && edge2.to.id == edge.to.id) || (edge2.to.id == edge.from.id && edge2.from.id == edge.to.id)) {
+                    good = false
+                    break
+                }
+            }
+            if(good) {
+                onlyGoodEdges.append(edge)
+            }
+        }
+                    
+        self.edges = onlyGoodEdges
+    }
+}
