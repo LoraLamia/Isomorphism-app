@@ -104,7 +104,7 @@ class MatrixViewController: UIViewController {
         processButton.autoSetDimension(.height, toSize: 50)
     }
     
-    func createMatrixInputFields(size: Int, tag: Int) -> UIView {
+    private func createMatrixInputFields(size: Int, tag: Int) -> UIView {
         let matrixView = UIView()
         
         var previousTextField: UITextField?
@@ -151,6 +151,23 @@ class MatrixViewController: UIViewController {
         return matrixView
     }
     
+    private func resetViewController() {
+        matrixSizeFieldOne.text = ""
+        matrixSizeFieldTwo.text = ""
+        
+        inputMatrixViewOne.removeFromSuperview()
+        inputMatrixViewTwo.removeFromSuperview()
+        
+        inputMatrixViewOne = createMatrixInputFields(size: 0, tag: 100)
+        inputMatrixViewTwo = createMatrixInputFields(size: 0, tag: 200)
+        
+        graphOne = Graph()
+        graphTwo = Graph()
+        
+        generateButton.isHidden = false
+        processButton.isHidden = true
+    }
+
     @objc func processInputMatrices() {
         guard let sizeOne = matrixSizeFieldOne.text.flatMap(Int.init),
               let sizeTwo = matrixSizeFieldTwo.text.flatMap(Int.init),
@@ -180,7 +197,7 @@ class MatrixViewController: UIViewController {
         alert.setValue(attributedMessage, forKey: "attributedMessage")
         
         let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
-            //TODO: reset
+            self?.resetViewController()
         }
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
@@ -201,13 +218,12 @@ class MatrixViewController: UIViewController {
         return matrix
     }
     
-    func createGraph(from adjacencyMatrix: [[Int]]) -> Graph {
+    private func createGraph(from adjacencyMatrix: [[Int]]) -> Graph {
         let graph = Graph()
         let vertexCount = adjacencyMatrix.count
         
         //add vertices
         for id in 0..<vertexCount {
-            let vertex = Vertex(id: id, position: CGPoint.zero)
             graph.addVertex(position: CGPoint(x: 0, y: 0))
         }
         

@@ -25,7 +25,7 @@ class AlgorithmInvariantInducingFunctions {
         graphOne.X1()
         graphTwo.X1()
         
-        //usporedi X[0]
+        //usporedi X[1]
         
         let len1 = graphOne.X[1].count
         let len2 = graphTwo.X[1].count
