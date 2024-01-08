@@ -1,7 +1,7 @@
 import UIKit
 import PureLayout
 
-class MatrixViewController: UIViewController {
+class MatrixViewController: UIViewController, UITextFieldDelegate {
     
     var matrixSizeFieldOne: UITextField!
     var matrixSizeFieldTwo: UITextField!
@@ -17,6 +17,24 @@ class MatrixViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupMatrixSizeFields()
+        
+        matrixSizeFieldOne.delegate = self
+        matrixSizeFieldTwo.delegate = self
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneButtonTapped))
+        
+        toolbar.items = [doneButton]
+        
+        matrixSizeFieldOne.inputAccessoryView = toolbar
+        matrixSizeFieldTwo.inputAccessoryView = toolbar
+    }
+    
+    @objc func doneButtonTapped() {
+        matrixSizeFieldOne.resignFirstResponder()
+        matrixSizeFieldTwo.resignFirstResponder()
     }
     
     func setupMatrixSizeFields() {
