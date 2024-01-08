@@ -68,6 +68,29 @@ class MatrixViewController: UIViewController {
             return
         }
         
+        if (sizeOne > 8 || sizeTwo > 8) {
+            let message = "This in an app for graphs with less than 9 vertices!"
+            let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+            
+            let attributedMessage = NSMutableAttributedString(
+                string: message,
+                attributes: [
+                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)
+                ]
+            )
+            alert.setValue(attributedMessage, forKey: "attributedMessage")
+            
+            let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+                self?.resetViewController()
+            }
+            
+            alert.addAction(okAction)
+            
+            self.present(alert, animated: true, completion: nil)
+            
+            return
+        }
+        
         generateButton.isHidden = true
         
         inputMatrixViewOne = createMatrixInputFields(size: sizeOne, tag: 100)
@@ -102,6 +125,7 @@ class MatrixViewController: UIViewController {
         processButton.autoPinEdge(.leading, to: .leading, of: view, withOffset: 20)
         processButton.autoPinEdge(.trailing, to: .trailing, of: view, withOffset: -20)
         processButton.autoSetDimension(.height, toSize: 50)
+        
     }
     
     private func createMatrixInputFields(size: Int, tag: Int) -> UIView {
@@ -109,7 +133,6 @@ class MatrixViewController: UIViewController {
         
         var previousTextField: UITextField?
         
-        //create matrix fields based on size
         for i in 0..<size {
             for j in 0..<size {
                 let textField = UITextField()
@@ -118,7 +141,6 @@ class MatrixViewController: UIViewController {
                 textField.tag = tag + (i * size) + j
                 matrixView.addSubview(textField)
                 
-                // Setup constraints for textField
                 textField.autoSetDimensions(to: CGSize(width: 40, height: 40))
                 
                 if j == 0 { //first column
@@ -146,7 +168,7 @@ class MatrixViewController: UIViewController {
                     textField.autoPinEdge(toSuperviewEdge: .bottom)
                 }
             }
-            previousTextField = nil //reset for the next row
+            previousTextField = nil
         }
         return matrixView
     }
@@ -154,9 +176,8 @@ class MatrixViewController: UIViewController {
     private func resetViewController() {
         matrixSizeFieldOne.text = ""
         matrixSizeFieldTwo.text = ""
-        
-        inputMatrixViewOne.removeFromSuperview()
-        inputMatrixViewTwo.removeFromSuperview()
+        inputMatrixViewOne?.removeFromSuperview()
+        inputMatrixViewTwo?.removeFromSuperview()
         
         inputMatrixViewOne = createMatrixInputFields(size: 0, tag: 100)
         inputMatrixViewTwo = createMatrixInputFields(size: 0, tag: 200)
@@ -164,8 +185,8 @@ class MatrixViewController: UIViewController {
         graphOne = Graph()
         graphTwo = Graph()
         
-        generateButton.isHidden = false
-        processButton.isHidden = true
+        generateButton?.isHidden = false
+        processButton?.isHidden = true
     }
 
     @objc func processInputMatrices() {
@@ -222,12 +243,10 @@ class MatrixViewController: UIViewController {
         let graph = Graph()
         let vertexCount = adjacencyMatrix.count
         
-        //add vertices
-        for id in 0..<vertexCount {
+        for _ in 0..<vertexCount {
             graph.addVertex(position: CGPoint(x: 0, y: 0))
         }
         
-        //add edges based on adjacency matrix
         for i in 0..<vertexCount {
             for j in 0..<vertexCount {
                 if adjacencyMatrix[i][j] == 1 && i != j { //check for edge and avoid self-loops

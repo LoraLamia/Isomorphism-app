@@ -46,7 +46,6 @@ class Graph {
         X.append(res)
     }
     
-    //radi, testirano
     func X2() {
         var dict: [[Int]: [Vertex]] = [:]
         for vertex in vertices {
@@ -119,7 +118,6 @@ class Graph {
         return edges.filter { $0.from.id == vertex.id || $0.to.id == vertex.id }.count
     }
     
-    //radi, testirano, oblik: [br susjednih vrhova st=1, br susjednih vrhova st=2, ..., br susjednih vrhova st=n-1]
     func D2(vertex: Vertex) -> [Int] {
         let maxDegree = vertices.count - 1
         var degreeCount = [Int](repeating: 0, count: maxDegree)
