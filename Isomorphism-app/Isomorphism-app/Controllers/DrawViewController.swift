@@ -40,7 +40,25 @@ class DrawViewController: UIViewController {
     }
     
     @objc func checkIsomorphism() {
-        print("SAD")
+        let alg = AlgorithmInvariantInducingFunctions(graphOne: graphCanvasView.graphOne, graphTwo: graphCanvasView.graphTwo)
+        
+        let message = alg.areIsomorphic() ? "Graphs are isomorphic!" : "Graphs are NOT isomorphic!"
+        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        
+        let attributedMessage = NSMutableAttributedString(
+            string: message,
+            attributes: [
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18) 
+            ]
+        )
+        
+        alert.setValue(attributedMessage, forKey: "attributedMessage")
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            self?.graphCanvasView.resetGraphs()
+        }
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     

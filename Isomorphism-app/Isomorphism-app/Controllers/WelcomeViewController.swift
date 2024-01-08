@@ -89,6 +89,7 @@ class WelcomeViewController: UIViewController {
         
         drawButton.addTarget(self, action: #selector(vertexEdgeButtonTapped), for: .touchUpInside)
         matrixButton.addTarget(self, action: #selector(matrixButtonTapped), for: .touchUpInside)
+        clasificationButton.addTarget(self, action: #selector(clasificationButtonTapped), for: .touchUpInside)
     }
     
     @objc func vertexEdgeButtonTapped() {
@@ -98,6 +99,11 @@ class WelcomeViewController: UIViewController {
     
     @objc func matrixButtonTapped() {
         let viewController = MatrixViewController()
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @objc func clasificationButtonTapped() {
+        let viewController = ClasificationViewController()
         navigationController?.pushViewController(viewController, animated: true)
     }
 }

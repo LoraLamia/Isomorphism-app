@@ -177,6 +177,12 @@ class GraphCanvasView: UIView {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         self.addGestureRecognizer(panGesture)
     }
+    
+    func resetGraphs() {
+        graphOne = Graph()
+        graphTwo = Graph()
+        setNeedsDisplay() 
+    }
 }
 
 extension CGPoint {

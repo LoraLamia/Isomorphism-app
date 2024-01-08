@@ -19,7 +19,6 @@
 		35B93D7D2B3C1E0A0085411F /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D7C2B3C1E0A0085411F /* Edge.swift */; };
 		35B93D812B3C1E880085411F /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D802B3C1E880085411F /* Graph.swift */; };
 		35B93D832B3C1ED30085411F /* GraphCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D822B3C1ED30085411F /* GraphCanvasView.swift */; };
-		35B93D862B3C1F150085411F /* GraphIsomorphismChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D852B3C1F150085411F /* GraphIsomorphismChecker.swift */; };
 		35B93D892B3C79370085411F /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D882B3C79370085411F /* WelcomeViewController.swift */; };
 		35C923172B473D7500584BE9 /* AlgorithmInvariantInducingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C923162B473D7500584BE9 /* AlgorithmInvariantInducingFunctions.swift */; };
 /* End PBXBuildFile section */
@@ -38,7 +37,6 @@
 		35B93D7C2B3C1E0A0085411F /* Edge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
 		35B93D802B3C1E880085411F /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		35B93D822B3C1ED30085411F /* GraphCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCanvasView.swift; sourceTree = "<group>"; };
-		35B93D852B3C1F150085411F /* GraphIsomorphismChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphIsomorphismChecker.swift; sourceTree = "<group>"; };
 		35B93D882B3C79370085411F /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		35C923162B473D7500584BE9 /* AlgorithmInvariantInducingFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmInvariantInducingFunctions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,7 +106,6 @@
 		35B93D792B3C1DD50085411F /* Algorithms */ = {
 			isa = PBXGroup;
 			children = (
-				35B93D852B3C1F150085411F /* GraphIsomorphismChecker.swift */,
 				35C923162B473D7500584BE9 /* AlgorithmInvariantInducingFunctions.swift */,
 			);
 			path = Algorithms;
@@ -203,7 +200,6 @@
 			files = (
 				35B93D892B3C79370085411F /* WelcomeViewController.swift in Sources */,
 				35B93D612B3C11260085411F /* DrawViewController.swift in Sources */,
-				35B93D862B3C1F150085411F /* GraphIsomorphismChecker.swift in Sources */,
 				35B93D832B3C1ED30085411F /* GraphCanvasView.swift in Sources */,
 				35B93D7D2B3C1E0A0085411F /* Edge.swift in Sources */,
 				35B93D812B3C1E880085411F /* Graph.swift in Sources */,

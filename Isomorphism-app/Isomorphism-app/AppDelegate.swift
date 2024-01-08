@@ -77,9 +77,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        graf2.X2()
 //        print("X[2] za graf 2: \(graf2.X[2])")
         
-        var alg = AlgorithmInvariantInducingFunctions(graphOne: graf1, graphTwo: graf2)
-        alg.getPartitions()
-        print(alg.isomorphic)
+//        var alg = AlgorithmInvariantInducingFunctions(graphOne: graf1, graphTwo: graf2)
+//        alg.getPartitions()
+//        print(alg.isomorphic)
         
         
         return true

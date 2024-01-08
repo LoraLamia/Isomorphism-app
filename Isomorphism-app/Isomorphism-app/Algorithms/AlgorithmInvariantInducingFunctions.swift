@@ -11,16 +11,6 @@ class AlgorithmInvariantInducingFunctions {
         self.graphTwo = graphTwo
     }
     
-    func checkForIsomorphism() -> Bool {
-        
-       
-        
-        
-        
-        
-        return false
-    }
-    
     
     func getPartitions() {
         var values1X1: [Int] = []
@@ -131,13 +121,48 @@ class AlgorithmInvariantInducingFunctions {
         }
     }
     
-    func isIsomorphic() -> Bool {
+    func areIsomorphic() -> Bool {
         getPartitions()
         
         if(!self.isomorphic) {
             return false
         }
         
+        return backtrack(vertexIndex: 0, mapping: [:])      //vertexIndex = vertexId
+    }
+    
+    private func backtrack(vertexIndex: Int, mapping: [Int: Int]) -> Bool {
+        if vertexIndex == graphOne.vertices.count {
+            return true
+        }
+        
+        let vertexOne = graphOne.vertices[vertexIndex]
+        
+        for vertexTwo in graphTwo.vertices {
+            if isMappingGood(vertexOne: vertexOne, vertexTwo: vertexTwo, currentMapping: mapping) {
+                var temp = mapping
+                temp[vertexOne.id] = vertexTwo.id
+                
+                if backtrack(vertexIndex: vertexIndex + 1, mapping: temp) {
+                    return true
+                }
+            }
+        }
+        
+        return false
+    }
+    
+    private func isMappingGood(vertexOne: Vertex, vertexTwo: Vertex, currentMapping: [Int: Int]) -> Bool {
+        for edge in graphOne.edges {
+            if edge.from.id == vertexOne.id || edge.to.id == vertexOne.id {
+                let mappedVertexId = (edge.from.id == vertexOne.id) ? edge.to.id : edge.from.id
+                if let mappedTo = currentMapping[mappedVertexId] {
+                    if !graphTwo.edges.contains(where: { ($0.from.id == vertexTwo.id || $0.to.id == vertexTwo.id) && ($0.from.id == mappedTo || $0.to.id == mappedTo) }) {
+                        return false
+                    }
+                }
+            }
+        }
         return true
     }
 }

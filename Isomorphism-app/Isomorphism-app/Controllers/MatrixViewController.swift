@@ -32,7 +32,6 @@ class MatrixViewController: UIViewController {
         matrixSizeFieldTwo.autoPinEdge(.top, to: .bottom, of: matrixSizeFieldOne, withOffset: 20)
         matrixSizeFieldTwo.autoAlignAxis(toSuperviewAxis: .vertical)
         
-        // Add a button to generate matrix input fields
         generateButton = UIButton()
         generateButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         generateButton.backgroundColor = UIColor.systemBlue
@@ -71,14 +70,12 @@ class MatrixViewController: UIViewController {
         
         generateButton.isHidden = true
         
-        // Create and display matrix input fields based on entered sizes
         inputMatrixViewOne = createMatrixInputFields(size: sizeOne, tag: 100)
         inputMatrixViewTwo = createMatrixInputFields(size: sizeTwo, tag: 200)
         
         view.addSubview(inputMatrixViewOne)
         view.addSubview(inputMatrixViewTwo)
         
-        // Setup constraints for matrix input views
         inputMatrixViewOne.autoPinEdge(.top, to: .bottom, of: matrixSizeFieldTwo, withOffset: 20)
         inputMatrixViewOne.autoAlignAxis(toSuperviewAxis: .vertical)
         inputMatrixViewOne.autoSetDimensions(to: CGSize(width: CGFloat(sizeOne * 40), height: CGFloat(sizeOne * 40)))
@@ -87,7 +84,6 @@ class MatrixViewController: UIViewController {
         inputMatrixViewTwo.autoAlignAxis(toSuperviewAxis: .vertical)
         inputMatrixViewTwo.autoSetDimensions(to: CGSize(width: CGFloat(sizeTwo * 40), height: CGFloat(sizeTwo * 40)))
         
-        // Add a button to process the matrices
         processButton = UIButton()
         processButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         processButton.backgroundColor = UIColor.systemBlue
@@ -113,7 +109,7 @@ class MatrixViewController: UIViewController {
         
         var previousTextField: UITextField?
         
-        // Create matrix fields based on size
+        //create matrix fields based on size
         for i in 0..<size {
             for j in 0..<size {
                 let textField = UITextField()
@@ -125,16 +121,16 @@ class MatrixViewController: UIViewController {
                 // Setup constraints for textField
                 textField.autoSetDimensions(to: CGSize(width: 40, height: 40))
                 
-                if j == 0 { // first column
+                if j == 0 { //first column
                     textField.autoPinEdge(toSuperviewEdge: .leading)
                 } else {
                     textField.autoPinEdge(.leading, to: .trailing, of: previousTextField!)
                 }
                 
-                if i == 0 { // first row
+                if i == 0 { //first row
                     textField.autoPinEdge(toSuperviewEdge: .top)
                 } else {
-                    // Align textField to the one above it
+                    //align textField to the one above it
                     if let aboveTextField = matrixView.viewWithTag(textField.tag - size) as? UITextField {
                         textField.autoPinEdge(.top, to: .bottom, of: aboveTextField)
                     }
@@ -142,15 +138,15 @@ class MatrixViewController: UIViewController {
                 
                 previousTextField = textField
                 
-                if j == size - 1 { // last column
+                if j == size - 1 { //last column
                     textField.autoPinEdge(toSuperviewEdge: .trailing)
                 }
                 
-                if i == size - 1 { // last row
+                if i == size - 1 { //last row
                     textField.autoPinEdge(toSuperviewEdge: .bottom)
                 }
             }
-            previousTextField = nil // reset for the next row
+            previousTextField = nil //reset for the next row
         }
         return matrixView
     }
@@ -169,6 +165,25 @@ class MatrixViewController: UIViewController {
         graphOne = createGraph(from: adjacencyMatrixOne)
         graphTwo = createGraph(from: adjacencyMatrixTwo)
         
+        let alg = AlgorithmInvariantInducingFunctions(graphOne: graphOne, graphTwo: graphTwo)
+        
+        let message = alg.areIsomorphic() ? "Graphs are isomorphic!" : "Graphs are NOT isomorphic!"
+        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        
+        let attributedMessage = NSMutableAttributedString(
+            string: message,
+            attributes: [
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)
+            ]
+        )
+        
+        alert.setValue(attributedMessage, forKey: "attributedMessage")
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+            //TODO: reset
+        }
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     func parseMatrix(from matrixView: UIView, size: Int, startingTag: Int) -> [[Int]] {
@@ -190,16 +205,16 @@ class MatrixViewController: UIViewController {
         let graph = Graph()
         let vertexCount = adjacencyMatrix.count
         
-        // Add vertices
+        //add vertices
         for id in 0..<vertexCount {
             let vertex = Vertex(id: id, position: CGPoint.zero)
             graph.addVertex(position: CGPoint(x: 0, y: 0))
         }
         
-        // Add edges based on adjacency matrix
+        //add edges based on adjacency matrix
         for i in 0..<vertexCount {
             for j in 0..<vertexCount {
-                if adjacencyMatrix[i][j] == 1 && i != j { // Check for edge and avoid self-loops
+                if adjacencyMatrix[i][j] == 1 && i != j { //check for edge and avoid self-loops
                     graph.addEdge(from: graph.vertices[i], to: graph.vertices[j])
                 }
             }
