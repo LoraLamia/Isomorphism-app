@@ -86,6 +86,28 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
+        if (sizeOne != sizeTwo) {
+            let message = "Adjacency matrices must have equal dimensions!"
+            let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+            
+            let attributedMessage = NSMutableAttributedString(
+                string: message,
+                attributes: [
+                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)
+                ]
+            )
+            alert.setValue(attributedMessage, forKey: "attributedMessage")
+            
+            let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+                self?.resetViewController()
+            }
+            
+            alert.addAction(okAction)
+            
+            self.present(alert, animated: true, completion: nil)
+            
+            return
+        }
         if (sizeOne > 8 || sizeTwo > 8) {
             let message = "This in an app for graphs with less than 9 vertices!"
             let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
