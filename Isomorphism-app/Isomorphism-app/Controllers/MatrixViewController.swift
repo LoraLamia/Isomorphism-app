@@ -9,6 +9,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
     var inputMatrixViewTwo: UIView!
     var generateButton: UIButton!
     var processButton: UIButton!
+    var scrollView: UIScrollView!
     
     var graphOne: Graph!
     var graphTwo: Graph!
@@ -16,6 +17,15 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scrollView)
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
         setupMatrixSizeFields()
         
         matrixSizeFieldOne.delegate = self
@@ -41,8 +51,8 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         matrixSizeFieldOne = createMatrixSizeField(placeholder: "Enter size for graph 1")
         matrixSizeFieldTwo = createMatrixSizeField(placeholder: "Enter size for graph 2")
         
-        view.addSubview(matrixSizeFieldOne)
-        view.addSubview(matrixSizeFieldTwo)
+        scrollView.addSubview(matrixSizeFieldOne)
+        scrollView.addSubview(matrixSizeFieldTwo)
         
         matrixSizeFieldOne.autoPinEdge(toSuperviewEdge: .top, withInset: 100)
         matrixSizeFieldOne.autoAlignAxis(toSuperviewAxis: .vertical)
@@ -62,7 +72,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         generateButton.layer.shadowOpacity = 0.5
         generateButton.layer.masksToBounds = false
         generateButton.addTarget(self, action: #selector(generateMatrixInputFields), for: .touchUpInside)
-        view.addSubview(generateButton)
+        scrollView.addSubview(generateButton)
         
         generateButton.autoPinEdge(.top, to: .bottom, of: matrixSizeFieldTwo, withOffset: 30)
         generateButton.autoPinEdge(.leading, to: .leading, of: view, withOffset: 20)
@@ -136,8 +146,8 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         inputMatrixViewOne = createMatrixInputFields(size: sizeOne, tag: 100)
         inputMatrixViewTwo = createMatrixInputFields(size: sizeTwo, tag: 200)
         
-        view.addSubview(inputMatrixViewOne)
-        view.addSubview(inputMatrixViewTwo)
+        scrollView.addSubview(inputMatrixViewOne)
+        scrollView.addSubview(inputMatrixViewTwo)
         
         inputMatrixViewOne.autoPinEdge(.top, to: .bottom, of: matrixSizeFieldTwo, withOffset: 20)
         inputMatrixViewOne.autoAlignAxis(toSuperviewAxis: .vertical)
@@ -148,6 +158,10 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         inputMatrixViewTwo.autoSetDimensions(to: CGSize(width: CGFloat(sizeTwo * 40), height: CGFloat(sizeTwo * 40)))
         
         processButton = UIButton()
+        let bottomOffset = CGFloat(1000)
+        let contentHeight = processButton.frame.maxY + bottomOffset
+        scrollView.contentSize = CGSize(width: view.frame.width, height: contentHeight)
+        
         processButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         processButton.backgroundColor = UIColor.systemBlue
         processButton.setTitleColor(.white, for: .normal)
@@ -159,7 +173,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         processButton.layer.shadowOpacity = 0.5
         processButton.layer.masksToBounds = false
         processButton.addTarget(self, action: #selector(processInputMatrices), for: .touchUpInside)
-        view.addSubview(processButton)
+        scrollView.addSubview(processButton)
         
         processButton.autoPinEdge(.top, to: .bottom, of: inputMatrixViewTwo, withOffset: 20)
         processButton.autoPinEdge(.leading, to: .leading, of: view, withOffset: 20)
@@ -262,6 +276,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         
         let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
             self?.resetViewController()
+            self?.scrollView.setContentOffset(CGPoint.zero, animated: true)
         }
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
