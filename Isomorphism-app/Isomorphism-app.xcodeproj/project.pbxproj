@@ -21,6 +21,7 @@
 		35B93D832B3C1ED30085411F /* GraphCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D822B3C1ED30085411F /* GraphCanvasView.swift */; };
 		35B93D892B3C79370085411F /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D882B3C79370085411F /* WelcomeViewController.swift */; };
 		35C923172B473D7500584BE9 /* AlgorithmInvariantInducingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C923162B473D7500584BE9 /* AlgorithmInvariantInducingFunctions.swift */; };
+		35FE3C912B4F7F0C00F68766 /* AlgorithmCertificates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FE3C902B4F7F0C00F68766 /* AlgorithmCertificates.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		35B93D822B3C1ED30085411F /* GraphCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCanvasView.swift; sourceTree = "<group>"; };
 		35B93D882B3C79370085411F /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		35C923162B473D7500584BE9 /* AlgorithmInvariantInducingFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmInvariantInducingFunctions.swift; sourceTree = "<group>"; };
+		35FE3C902B4F7F0C00F68766 /* AlgorithmCertificates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmCertificates.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				35C923162B473D7500584BE9 /* AlgorithmInvariantInducingFunctions.swift */,
+				35FE3C902B4F7F0C00F68766 /* AlgorithmCertificates.swift */,
 			);
 			path = Algorithms;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 				35C923172B473D7500584BE9 /* AlgorithmInvariantInducingFunctions.swift in Sources */,
 				35B93D7B2B3C1DFF0085411F /* Vertex.swift in Sources */,
 				35B4E4A52B3D847300659F22 /* MatrixViewController.swift in Sources */,
+				35FE3C912B4F7F0C00F68766 /* AlgorithmCertificates.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

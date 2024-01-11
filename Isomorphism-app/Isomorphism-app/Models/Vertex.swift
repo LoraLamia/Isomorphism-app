@@ -4,6 +4,7 @@ import CoreGraphics
 struct Vertex {
     var id: Int
     var position: CGPoint
+    var mark: [Int: String] = [:]
     
     func isNear(to point: CGPoint, radius: CGFloat) -> Bool {
         return self.position.distance(to: point) <= radius
