@@ -26,7 +26,6 @@ class AlgorithmCertificates {
         
         for vertex in graph.vertices {
             vertex.mark = "01"
-            //mijenjam strukturu?
         }
         while(graph.vertices.count > 2) {
             for vertex in graph.vertices {
@@ -51,6 +50,18 @@ class AlgorithmCertificates {
     }
     
     func areIsomorphic() -> Bool {
+        if(graphOne.isTree()) {
+            print("Prvi graf je stablo!")
+        } else {
+            print("Prvi graf NIJE stablo!")
+        }
+        
+        if(graphTwo.isTree()) {
+            print("Drugi graf je stablo!")
+        } else {
+            print("Drugi graf NIJE stablo!")
+        }
+        
         let cert = calculateCertificates()
         if(cert.0 == cert.1) {
             return true

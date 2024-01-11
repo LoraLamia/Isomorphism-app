@@ -154,3 +154,38 @@ extension Graph {
         self.edges = onlyGoodEdges
     }
 }
+
+extension Graph {
+    func isTree() -> Bool {
+        guard !vertices.isEmpty else {
+            return false
+        }
+
+        var visited = Set<Vertex>()
+        if hasCycle(vertex: vertices[0], visited: &visited, parent: nil) {
+            return false
+        }
+
+        return visited.count == vertices.count
+    }
+
+    private func hasCycle(vertex: Vertex, visited: inout Set<Vertex>, parent: Vertex?) -> Bool {
+        visited.insert(vertex)
+
+        for edge in edges where edge.from == vertex || edge.to == vertex {
+            let neighbour = (edge.from == vertex) ? edge.to : edge.from
+
+            if visited.contains(neighbour) {
+                if neighbour != parent {
+                    return true
+                }
+            } else {
+                if hasCycle(vertex: neighbour, visited: &visited, parent: vertex) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+}
+
