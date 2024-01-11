@@ -17,6 +17,11 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        scrollViewSetUp()
+        setupMatrixSizeFields()
+    }
+    
+    private func scrollViewSetUp() {
         scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
@@ -26,25 +31,6 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        setupMatrixSizeFields()
-        
-        matrixSizeFieldOne.delegate = self
-        matrixSizeFieldTwo.delegate = self
-        
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneButtonTapped))
-        
-        toolbar.items = [doneButton]
-        
-        matrixSizeFieldOne.inputAccessoryView = toolbar
-        matrixSizeFieldTwo.inputAccessoryView = toolbar
-    }
-    
-    @objc func doneButtonTapped() {
-        matrixSizeFieldOne.resignFirstResponder()
-        matrixSizeFieldTwo.resignFirstResponder()
     }
     
     func setupMatrixSizeFields() {
@@ -160,19 +146,19 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         processButton = UIButton()
         var bottomOffSet: CGFloat? = nil
         if (sizeOne == 8) {
-            bottomOffSet = CGFloat(1200)
+            bottomOffSet = CGFloat(1180)
         } else if (sizeOne == 7) {
-            bottomOffSet = CGFloat(1120)
+            bottomOffSet = CGFloat(1100)
         } else if (sizeOne == 6) {
-            bottomOffSet = CGFloat(1040)
+            bottomOffSet = CGFloat(1020)
         } else if (sizeOne == 5) {
-            bottomOffSet = CGFloat(960)
+            bottomOffSet = CGFloat(940)
         } else if (sizeOne == 4) {
-            bottomOffSet = CGFloat(880)
+            bottomOffSet = CGFloat(860)
         } else if (sizeOne == 3) {
-            bottomOffSet = CGFloat(800)
+            bottomOffSet = CGFloat(780)
         } else {
-            bottomOffSet = CGFloat(740)
+            bottomOffSet = CGFloat(720)
         }
         let contentHeight = processButton.frame.maxY + bottomOffSet!
         scrollView.contentSize = CGSize(width: view.frame.width, height: contentHeight)
