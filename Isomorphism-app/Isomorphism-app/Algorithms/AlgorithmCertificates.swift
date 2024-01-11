@@ -5,8 +5,8 @@ class AlgorithmCertificates {
     var graphOne: Graph
     var graphTwo: Graph
     var isomorphic: Bool = true
-    var Y: [Vertex: [String]] = [:]
-    var X: [Vertex: [String]] = [:]
+//    var Y: [Vertex: [String]] = [:]
+//    var X: [Vertex: [String]] = [:]
     
     init(graphOne: Graph, graphTwo: Graph) {
         self.graphOne = graphOne
@@ -15,12 +15,21 @@ class AlgorithmCertificates {
     
     func calculateCertificates() -> (String, String) {
         var certs = ("", "")
-        for var vertex in graphOne.vertices {
+        certs.0 = calculateCertficate(graph: graphOne)
+        certs.1 = calculateCertficate(graph: graphTwo)
+        
+        return certs
+    }
+    
+    func calculateCertficate(graph: Graph) -> String {
+        var cert = ""
+        
+        for var vertex in graph.vertices {
             vertex.mark[vertex.id] = "01"
         }
-        while(graphOne.vertices.count > 2) {
-            for vertex in graphOne.vertices {
-                if(graphOne.D1(vertex: vertex) == 1) {
+        while(graph.vertices.count > 2) {
+            for vertex in graph.vertices {
+                if(graph.D1(vertex: vertex) == 1) {
                     continue
                 }
                 //tu sad idu koraci a,b,c algoritma
@@ -28,16 +37,16 @@ class AlgorithmCertificates {
             }
         }
         var conc: [String] = []
-        if(graphOne.vertices.count == 1) {
-            certs.0 = graphOne.vertices[0].mark[graphOne.vertices[0].id] ?? "fail"
-        } else if(graphOne.vertices.count == 2) {
-            conc.append(graphOne.vertices[0].mark[graphOne.vertices[0].id] ?? "fail")
-            conc.append(graphTwo.vertices[0].mark[graphTwo.vertices[0].id] ?? "fail")
+        if(graph.vertices.count == 1) {
+            cert = graph.vertices[0].mark[graph.vertices[0].id] ?? "fail"
+        } else if(graph.vertices.count == 2) {
+            conc.append(graph.vertices[0].mark[graph.vertices[0].id] ?? "fail")
+            conc.append(graph.vertices[1].mark[graph.vertices[1].id] ?? "fail")
             conc.sort()
-            certs.0 = conc[0] + conc[1]
+            cert = conc[0] + conc[1]
         }
         
-        return certs
+        return cert
     }
     
     func areIsomorphic() -> Bool {
