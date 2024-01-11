@@ -54,7 +54,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         scrollView.addSubview(matrixSizeFieldOne)
         scrollView.addSubview(matrixSizeFieldTwo)
         
-        matrixSizeFieldOne.autoPinEdge(toSuperviewEdge: .top, withInset: 100)
+        matrixSizeFieldOne.autoPinEdge(.top, to: .top, of: scrollView, withOffset: 50)
         matrixSizeFieldOne.autoAlignAxis(toSuperviewAxis: .vertical)
         
         matrixSizeFieldTwo.autoPinEdge(.top, to: .bottom, of: matrixSizeFieldOne, withOffset: 20)
@@ -158,8 +158,15 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         inputMatrixViewTwo.autoSetDimensions(to: CGSize(width: CGFloat(sizeTwo * 40), height: CGFloat(sizeTwo * 40)))
         
         processButton = UIButton()
-        let bottomOffset = CGFloat(1000)
-        let contentHeight = processButton.frame.maxY + bottomOffset
+        var bottomOffSet: CGFloat? = nil
+        if (sizeOne >= 7) {
+            bottomOffSet = CGFloat(1200)
+        } else if (sizeOne >= 5) {
+            bottomOffSet = CGFloat(1050)
+        } else {
+            bottomOffSet = CGFloat(880)
+        }
+        let contentHeight = processButton.frame.maxY + bottomOffSet!
         scrollView.contentSize = CGSize(width: view.frame.width, height: contentHeight)
         
         processButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
@@ -233,14 +240,19 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         inputMatrixViewOne?.removeFromSuperview()
         inputMatrixViewTwo?.removeFromSuperview()
         
-        inputMatrixViewOne = createMatrixInputFields(size: 0, tag: 100)
-        inputMatrixViewTwo = createMatrixInputFields(size: 0, tag: 200)
+//        inputMatrixViewOne = createMatrixInputFields(size: 0, tag: 100)
+//        inputMatrixViewTwo = createMatrixInputFields(size: 0, tag: 200)
         
         graphOne = Graph()
         graphTwo = Graph()
         
         generateButton?.isHidden = false
         processButton?.isHidden = true
+        
+        self.scrollView.setContentOffset(CGPoint.zero, animated: false)
+        scrollView.contentSize = CGSize(width: view.frame.width, height: 20)
+
+        self.view.layoutIfNeeded()
     }
 
     @objc func processInputMatrices() {
@@ -276,7 +288,6 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         
         let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
             self?.resetViewController()
-            self?.scrollView.setContentOffset(CGPoint.zero, animated: true)
         }
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
