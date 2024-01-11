@@ -24,8 +24,9 @@ class AlgorithmCertificates {
     func calculateCertficate(graph: Graph) -> String {
         var cert = ""
         
-        for var vertex in graph.vertices {
-            vertex.mark[vertex.id] = "01"
+        for vertex in graph.vertices {
+            vertex.mark = "01"
+            //mijenjam strukturu?
         }
         while(graph.vertices.count > 2) {
             for vertex in graph.vertices {
@@ -38,10 +39,10 @@ class AlgorithmCertificates {
         }
         var conc: [String] = []
         if(graph.vertices.count == 1) {
-            cert = graph.vertices[0].mark[graph.vertices[0].id] ?? "fail"
+            cert = graph.vertices[0].mark
         } else if(graph.vertices.count == 2) {
-            conc.append(graph.vertices[0].mark[graph.vertices[0].id] ?? "fail")
-            conc.append(graph.vertices[1].mark[graph.vertices[1].id] ?? "fail")
+            conc.append(graph.vertices[0].mark)
+            conc.append(graph.vertices[1].mark)
             conc.sort()
             cert = conc[0] + conc[1]
         }
