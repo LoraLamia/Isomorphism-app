@@ -14,6 +14,7 @@ class AlgorithmCertificates {
     }
     
     func calculateCertificates() -> (String, String) {
+        var certs = ("", "")
         for var vertex in graphOne.vertices {
             vertex.mark[vertex.id] = "01"
         }
@@ -26,7 +27,17 @@ class AlgorithmCertificates {
                 
             }
         }
-        return ("", "")
+        var conc: [String] = []
+        if(graphOne.vertices.count == 1) {
+            certs.0 = graphOne.vertices[0].mark[graphOne.vertices[0].id] ?? "fail"
+        } else if(graphOne.vertices.count == 2) {
+            conc.append(graphOne.vertices[0].mark[graphOne.vertices[0].id] ?? "fail")
+            conc.append(graphTwo.vertices[0].mark[graphTwo.vertices[0].id] ?? "fail")
+            conc.sort()
+            certs.0 = conc[0] + conc[1]
+        }
+        
+        return certs
     }
     
     func areIsomorphic() -> Bool {
