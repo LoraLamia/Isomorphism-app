@@ -66,12 +66,6 @@ class AlgorithmInvariantInducingFunctions {
             return
         }
         
-        if(!self.isomorphic) {
-            print("NISU IZOMORFNI")
-        } else {
-            print("jeeeej proslo je!!!!")
-        }
-        
         graphOne.X2()
         graphTwo.X2()
         

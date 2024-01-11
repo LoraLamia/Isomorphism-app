@@ -159,12 +159,20 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         
         processButton = UIButton()
         var bottomOffSet: CGFloat? = nil
-        if (sizeOne >= 7) {
+        if (sizeOne == 8) {
             bottomOffSet = CGFloat(1200)
-        } else if (sizeOne >= 5) {
-            bottomOffSet = CGFloat(1050)
-        } else {
+        } else if (sizeOne == 7) {
+            bottomOffSet = CGFloat(1120)
+        } else if (sizeOne == 6) {
+            bottomOffSet = CGFloat(1040)
+        } else if (sizeOne == 5) {
+            bottomOffSet = CGFloat(960)
+        } else if (sizeOne == 4) {
             bottomOffSet = CGFloat(880)
+        } else if (sizeOne == 3) {
+            bottomOffSet = CGFloat(800)
+        } else {
+            bottomOffSet = CGFloat(740)
         }
         let contentHeight = processButton.frame.maxY + bottomOffSet!
         scrollView.contentSize = CGSize(width: view.frame.width, height: contentHeight)
