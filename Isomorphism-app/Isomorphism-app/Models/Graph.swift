@@ -192,5 +192,12 @@ extension Graph {
         self.edges.removeAll(where: { edge in edge.from == vertex || edge.to == vertex })
         self.vertices.removeAll(where: { v in v == vertex })
     }
+    
+    func replicate() -> Graph {
+        let graph = Graph()
+        graph.edges = self.edges
+        graph.vertices = self.vertices
+        return graph
+    }
 }
 

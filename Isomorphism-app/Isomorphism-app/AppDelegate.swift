@@ -80,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        var alg = AlgorithmInvariantInducingFunctions(graphOne: graf1, graphTwo: graf2)
 //        alg.getPartitions()
 //        print(alg.isomorphic)
-        
+                
         
         return true
     }

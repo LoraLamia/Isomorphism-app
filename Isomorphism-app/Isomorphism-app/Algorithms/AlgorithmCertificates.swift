@@ -29,19 +29,20 @@ class AlgorithmCertificates {
         }
         
         while(graph.vertices.count > 2) {
-            print(graph.vertices.count)
-            for vertex in graph.vertices {
-                if(graph.D1(vertex: vertex) == 1) {
+            let graphCurrentState = graph.replicate()
+            
+            for vertex in graphCurrentState.vertices {
+                if(graphCurrentState.D1(vertex: vertex) == 1) {
                     continue
                 }
                 var Y: [String] = []
-                for edge in graph.edges {
+                for edge in graphCurrentState.edges {
                     if(edge.from == vertex) {
-                        if(graph.D1(vertex: edge.to) == 1) {
+                        if(graphCurrentState.D1(vertex: edge.to) == 1) {
                             Y.append(edge.to.mark)
                         }
                     } else if(edge.to == vertex) {
-                        if(graph.D1(vertex: edge.from) == 1) {
+                        if(graphCurrentState.D1(vertex: edge.from) == 1) {
                             Y.append(edge.from.mark)
                         }
                     }
@@ -54,13 +55,13 @@ class AlgorithmCertificates {
                     concat += str
                 }
                 vertex.mark = "0" + concat + "1"
-                for edge in graph.edges {
+                for edge in graphCurrentState.edges {
                     if(edge.from == vertex) {
-                        if(graph.D1(vertex: edge.to) == 1) {
+                        if(graphCurrentState.D1(vertex: edge.to) == 1) {
                             graph.removeVertex(vertex: edge.to)
                         }
                     } else if(edge.to == vertex) {
-                        if(graph.D1(vertex: edge.from) == 1) {
+                        if(graphCurrentState.D1(vertex: edge.from) == 1) {
                             graph.removeVertex(vertex: edge.from)
                         }
                     }
