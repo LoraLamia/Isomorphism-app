@@ -187,5 +187,10 @@ extension Graph {
         }
         return false
     }
+    
+    func removeVertex(vertex: Vertex) {
+        self.edges.removeAll(where: { edge in edge.from == vertex || edge.to == vertex })
+        self.vertices.removeAll(where: { v in v == vertex })
+    }
 }
 

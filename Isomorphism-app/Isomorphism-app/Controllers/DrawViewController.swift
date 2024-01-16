@@ -40,11 +40,10 @@ class DrawViewController: UIViewController {
     }
     
     @objc func checkIsomorphism() {
+        print("press")
         let alg = AlgorithmCertificates(graphOne: graphCanvasView.graphOne, graphTwo: graphCanvasView.graphTwo)
         
-        let message = "temp message"
-        alg.areIsomorphic()
-//        let message = alg.areIsomorphic() ? "Graphs are isomorphic!" : "Graphs are NOT isomorphic!"
+        let message = alg.areIsomorphic() ? "Graphs are isomorphic!" : "Graphs are NOT isomorphic!"
         let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
         
         let attributedMessage = NSMutableAttributedString(
