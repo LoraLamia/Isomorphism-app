@@ -14,9 +14,7 @@ class AlgorithmCertificates {
     func calculateCertificates() -> (String, String) {
         var certs = ("", "")
         certs.0 = calculateCertficate(graph: graphOne)
-        print("Ovo je certifikat za prvi graf: \(certs.0)")
         certs.1 = calculateCertficate(graph: graphTwo)
-        print("Ovo je certifikat za drugi graf: \(certs.1)")
         
         return certs
     }
@@ -82,17 +80,6 @@ class AlgorithmCertificates {
     }
     
     func areIsomorphic() -> Bool {
-//        if(graphOne.isTree()) {
-//            print("Prvi graf je stablo!")
-//        } else {
-//            print("Prvi graf NIJE stablo!")
-//        }
-//        
-//        if(graphTwo.isTree()) {
-//            print("Drugi graf je stablo!")
-//        } else {
-//            print("Drugi graf NIJE stablo!")
-//        }
         
         let cert = calculateCertificates()
         if(cert.0 == cert.1) {
