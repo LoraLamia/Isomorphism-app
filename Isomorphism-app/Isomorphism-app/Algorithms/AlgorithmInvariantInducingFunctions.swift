@@ -160,3 +160,8 @@ class AlgorithmInvariantInducingFunctions {
         return true
     }
 }
+
+protocol GraphIsomorphismAlgorithm {
+    func areIsomorphic(graphOne: Graph, graphTwo: Graph) -> Bool
+}
+

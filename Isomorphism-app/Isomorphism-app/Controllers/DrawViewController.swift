@@ -4,6 +4,7 @@ import PureLayout
 class DrawViewController: UIViewController {
     var graphCanvasView: GraphCanvasView!
     var checkButton: UIButton!
+    let popupView = PopUpView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,10 @@ class DrawViewController: UIViewController {
         checkButton.layer.masksToBounds = false
         view.addSubview(checkButton)
         checkButton.addTarget(self, action: #selector(checkIsomorphism), for: .touchUpInside)
+        popupView.confirmButton.addTarget(self, action: #selector(selectAlgorithm), for: .touchUpInside)
+        
+        view.addSubview(popupView)
+        popupView.isHidden = true
     }
     
     func setupConstraints() {
@@ -37,11 +42,24 @@ class DrawViewController: UIViewController {
         checkButton.autoAlignAxis(toSuperviewAxis: .vertical)
         checkButton.autoPinEdge(.top, to: .bottom, of: graphCanvasView)
         checkButton.autoSetDimensions(to: CGSize(width: 200, height: 50))
+        
+        popupView.autoPinEdgesToSuperviewEdges()
     }
     
     @objc func checkIsomorphism() {
         print("press")
-        let alg = AlgorithmCertificates(graphOne: graphCanvasView.graphOne, graphTwo: graphCanvasView.graphTwo)
+        
+        popupView.isHidden = false
+        
+        
+    }
+    
+    @objc func selectAlgorithm() {
+        let selectionIndex = popupView.picker.selectedRow(inComponent: 0)
+        let selection = popupView.choices[selectionIndex]
+        print("odabrano: \(selection)")
+        
+        let alg = AlgorithmInvariantInducingFunctions(graphOne: graphCanvasView.graphOne, graphTwo: graphCanvasView.graphTwo)
         
         let message = alg.areIsomorphic() ? "Graphs are isomorphic!" : "Graphs are NOT isomorphic!"
         let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
@@ -49,7 +67,7 @@ class DrawViewController: UIViewController {
         let attributedMessage = NSMutableAttributedString(
             string: message,
             attributes: [
-                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18) 
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)
             ]
         )
         
@@ -60,6 +78,8 @@ class DrawViewController: UIViewController {
         }
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
+        
+        popupView.isHidden = true
     }
     
     
