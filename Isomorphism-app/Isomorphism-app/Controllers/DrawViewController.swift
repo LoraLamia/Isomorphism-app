@@ -47,25 +47,34 @@ class DrawViewController: UIViewController {
     }
     
     @objc func checkIsomorphism() {
-        print("press")
-        
         popupView.isHidden = false
-        
-        
     }
     
     @objc func selectAlgorithm() {
         let selectionIndex = popupView.picker.selectedRow(inComponent: 0)
         let selection = popupView.choices[selectionIndex]
-        print("odabrano: \(selection)")
         
-        let alg = AlgorithmInvariantInducingFunctions(graphOne: graphCanvasView.graphOne, graphTwo: graphCanvasView.graphTwo)
+        var alg: GraphIsomorphismAlgorithm?
+        var message: String?
+        if(selection == "Invarijants algorithm") {
+            alg = AlgorithmInvariantInducingFunctions(graphOne: graphCanvasView.graphOne, graphTwo: graphCanvasView.graphTwo)
+        } else if(selection == "Certificates algorithm") {
+            if(!graphCanvasView.graphOne.isTree() || !graphCanvasView.graphTwo.isTree()) {
+            } else {
+                alg = AlgorithmCertificates(graphOne: graphCanvasView.graphOne, graphTwo: graphCanvasView.graphTwo)
+            }
+        }
         
-        let message = alg.areIsomorphic() ? "Graphs are isomorphic!" : "Graphs are NOT isomorphic!"
+        if let alg = alg {
+            message = alg.areIsomorphic() ? "Graphs are isomorphic!" : "Graphs are NOT isomorphic!"
+        } else {
+            message = "Both graphs need to be trees!"
+        }
+        
         let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
         
         let attributedMessage = NSMutableAttributedString(
-            string: message,
+            string: message ?? "",
             attributes: [
                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)
             ]

@@ -1,6 +1,6 @@
 import Foundation
 
-class AlgorithmInvariantInducingFunctions {
+class AlgorithmInvariantInducingFunctions: GraphIsomorphismAlgorithm {
     
     let graphOne: Graph
     let graphTwo: Graph
@@ -16,7 +16,7 @@ class AlgorithmInvariantInducingFunctions {
         var values1X1: [Int] = []
         var values2X1: [Int] = []
         
-        //usporedi X[0]
+        //  X[0]
         if(graphOne.X[0][0].count != graphTwo.X[0][0].count) {
             self.isomorphic = false
             return
@@ -162,6 +162,7 @@ class AlgorithmInvariantInducingFunctions {
 }
 
 protocol GraphIsomorphismAlgorithm {
-    func areIsomorphic(graphOne: Graph, graphTwo: Graph) -> Bool
+    
+    func areIsomorphic() -> Bool
 }
 

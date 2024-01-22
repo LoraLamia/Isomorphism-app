@@ -5,7 +5,7 @@ class PopUpView: UIView {
     let popUpView = UIView()
     let picker = UIPickerView()
     let confirmButton = UIButton()
-    let choices = ["Inavrijants algorithm", "Certificates algorithm"]
+    let choices = ["Invarijants algorithm", "Certificates algorithm"]
     
     override init(frame: CGRect) {
         super.init(frame: frame)

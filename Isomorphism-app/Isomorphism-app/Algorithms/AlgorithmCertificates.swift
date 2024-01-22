@@ -1,6 +1,6 @@
 import Foundation
 
-class AlgorithmCertificates {
+class AlgorithmCertificates: GraphIsomorphismAlgorithm {
     
     var graphOne: Graph
     var graphTwo: Graph
