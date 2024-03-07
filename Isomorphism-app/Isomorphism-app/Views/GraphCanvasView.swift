@@ -69,6 +69,11 @@ class GraphCanvasView: UIView {
     @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
         
         let location = gesture.location(in: self)
+        if location.y < self.bounds.midY {
+            editingGraphOne = true
+        } else {
+            editingGraphOne = false
+        }
         switch gesture.state {
         case .began:
             //postoji li odabrani pocetni vrh
