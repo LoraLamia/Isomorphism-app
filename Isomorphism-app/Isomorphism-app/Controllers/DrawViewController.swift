@@ -72,20 +72,38 @@ class DrawViewController: UIViewController {
     }
     
     func presentResultAlert(message: String?) {
-        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        guard let message = message else { return }
         
-        let attributedMessage = NSMutableAttributedString(
-            string: message ?? "",
-            attributes: [
-                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)
+        let alert = UIAlertController(title: "", message: nil, preferredStyle: .alert)
+        
+        let lines = message.components(separatedBy: "\n")
+        
+        let attributedMessage = NSMutableAttributedString()
+
+        if let firstLine = lines.first {
+            let boldAttributes: [NSAttributedString.Key: Any] = [
+                .font: UIFont.boldSystemFont(ofSize: 18)
             ]
-        )
+            
+            attributedMessage.append(NSAttributedString(string: firstLine, attributes: boldAttributes))
+            
+            if lines.count > 1 {
+                attributedMessage.append(NSAttributedString(string: "\n"))
+            }
+        }
         
+        if lines.count > 1 {
+            let regularAttributes: [NSAttributedString.Key: Any] = [
+                .font: UIFont.systemFont(ofSize: 18)
+            ]
+            attributedMessage.append(NSAttributedString(string: lines[1], attributes: regularAttributes))
+        }
+
         alert.setValue(attributedMessage, forKey: "attributedMessage")
-        
+
         let okAction = UIAlertAction(title: "OK", style: .default)
         alert.addAction(okAction)
-        
+
         self.present(alert, animated: true, completion: nil)
     }
     
