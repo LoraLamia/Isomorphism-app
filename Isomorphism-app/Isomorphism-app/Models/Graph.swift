@@ -165,7 +165,8 @@ extension Graph {
         if hasCycle(vertex: vertices[0], visited: &visited, parent: nil) {
             return false
         }
-
+        
+        print("Graf je povezan: \(visited.count == vertices.count)")
         return visited.count == vertices.count
     }
 

@@ -45,6 +45,10 @@ class DrawViewController: UIViewController {
         
         if !graphCanvasView.graphOne.isTree() || !graphCanvasView.graphTwo.isTree() {
             message = "Both graphs need to be trees!"
+            DispatchQueue.main.async {
+                self.presentResultAlert(message: message)
+                self.graphCanvasView.resetGraphs()
+            }
         } else {
             alg = AlgorithmCertificatesTrees(graphOne: graphCanvasView.graphOne, graphTwo: graphCanvasView.graphTwo)
             
