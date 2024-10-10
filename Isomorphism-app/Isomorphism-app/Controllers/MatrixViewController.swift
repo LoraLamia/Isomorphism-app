@@ -269,7 +269,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         var message: String?
         if(!graphOne.isTree() || !graphTwo.isTree()) {
         } else {
-            alg = AlgorithmCertificates(graphOne: graphOne, graphTwo: graphTwo)
+            alg = AlgorithmCertificatesTrees(graphOne: graphOne, graphTwo: graphTwo)
         }
         
         if let alg = alg {

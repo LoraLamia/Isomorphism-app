@@ -44,7 +44,7 @@ class DrawViewController: UIViewController {
         var message: String?
         if(!graphCanvasView.graphOne.isTree() || !graphCanvasView.graphTwo.isTree()) {
         } else {
-            alg = AlgorithmCertificates(graphOne: graphCanvasView.graphOne, graphTwo: graphCanvasView.graphTwo)
+            alg = AlgorithmCertificatesTrees(graphOne: graphCanvasView.graphOne, graphTwo: graphCanvasView.graphTwo)
         }
         
         if let alg = alg {

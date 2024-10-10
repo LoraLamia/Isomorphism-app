@@ -1,6 +1,6 @@
 import Foundation
 
-class AlgorithmCertificates: GraphIsomorphismAlgorithm {
+class AlgorithmCertificatesTrees: GraphIsomorphismAlgorithm {
     
     var graphOne: Graph
     var graphTwo: Graph
@@ -11,7 +11,7 @@ class AlgorithmCertificates: GraphIsomorphismAlgorithm {
         self.graphTwo = graphTwo
     }
     
-    func calculateCertificates() -> (String, String) {
+    func calculateCertificatesTrees() -> (String, String) {
         var certs = ("", "")
         certs.0 = calculateCertficate(graph: graphOne)
         certs.1 = calculateCertficate(graph: graphTwo)
@@ -81,7 +81,7 @@ class AlgorithmCertificates: GraphIsomorphismAlgorithm {
     
     func areIsomorphic() -> Bool {
         
-        let cert = calculateCertificates()
+        let cert = calculateCertificatesTrees()
         if(cert.0 == cert.1) {
             return true
         } else {
