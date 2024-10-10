@@ -40,19 +40,34 @@ class DrawViewController: UIViewController {
     }
     
     @objc func checkIsomorphism() {
-        var alg: GraphIsomorphismAlgorithm?
+        var alg: AlgorithmCertificatesTrees?
         var message: String?
-        if(!graphCanvasView.graphOne.isTree() || !graphCanvasView.graphTwo.isTree()) {
+        
+        if !graphCanvasView.graphOne.isTree() || !graphCanvasView.graphTwo.isTree() {
+            message = "Both graphs need to be trees!"
         } else {
             alg = AlgorithmCertificatesTrees(graphOne: graphCanvasView.graphOne, graphTwo: graphCanvasView.graphTwo)
+            
+            let startTime = Date()
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+                let isomorphic = alg?.areIsomorphic() ?? false
+                
+                let endTime = Date()
+                let timeInterval = endTime.timeIntervalSince(startTime)
+                
+                message = isomorphic ? "Graphs are isomorphic!" : "Graphs are NOT isomorphic!"
+                message = "\(message!)\nDetermination time: \(String(format: "%.5f", timeInterval)) seconds"
+                
+                DispatchQueue.main.async {
+                    self.presentResultAlert(message: message)
+                    self.graphCanvasView.resetGraphs()
+                }
+            }
         }
-        
-        if let alg = alg {
-            message = alg.areIsomorphic() ? "Graphs are isomorphic!" : "Graphs are NOT isomorphic!"
-        } else {
-            message = "Both graphs need to be trees!"
-        }
-        
+    }
+    
+    func presentResultAlert(message: String?) {
         let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
         
         let attributedMessage = NSMutableAttributedString(
@@ -64,13 +79,11 @@ class DrawViewController: UIViewController {
         
         alert.setValue(attributedMessage, forKey: "attributedMessage")
         
-        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
-            self?.graphCanvasView.resetGraphs()
-        }
+        let okAction = UIAlertAction(title: "OK", style: .default)
         alert.addAction(okAction)
+        
         self.present(alert, animated: true, completion: nil)
     }
-    
     
 }
 
