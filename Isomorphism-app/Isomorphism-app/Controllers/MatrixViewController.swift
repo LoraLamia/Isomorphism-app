@@ -267,17 +267,36 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         
         var alg: GraphIsomorphismAlgorithm?
         var message: String?
-        if(!graphOne.isTree() || !graphTwo.isTree()) {
+        
+        if !graphOne.isTree() || !graphTwo.isTree() {
+            message = "Both graphs need to be trees!"
+            DispatchQueue.main.async {
+                self.presentResultAlert(message: message)
+                self.resetViewController()
+            }
         } else {
             alg = AlgorithmCertificatesTrees(graphOne: graphOne, graphTwo: graphTwo)
+            
+            let startTime = Date()
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+                let isomorphic = alg?.areIsomorphic() ?? false
+                
+                let endTime = Date()
+                let timeInterval = endTime.timeIntervalSince(startTime)
+                
+                message = isomorphic ? "Graphs are isomorphic!" : "Graphs are NOT isomorphic!"
+                message = "\(message!)\nDetermination time: \(String(format: "%.5f", timeInterval)) seconds"
+                
+                DispatchQueue.main.async {
+                    self.presentResultAlert(message: message)
+                    self.resetViewController()
+                }
+            }
         }
-        
-        if let alg = alg {
-            message = alg.areIsomorphic() ? "Graphs are isomorphic!" : "Graphs are NOT isomorphic!"
-        } else {
-            message = "Both graphs need to be trees!"
-        }
-        
+    }
+    
+    func presentResultAlert(message: String?) {
         let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
         
         let attributedMessage = NSMutableAttributedString(
@@ -289,10 +308,9 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         
         alert.setValue(attributedMessage, forKey: "attributedMessage")
         
-        let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
-            self?.resetViewController()
-        }
+        let okAction = UIAlertAction(title: "OK", style: .default)
         alert.addAction(okAction)
+        
         self.present(alert, animated: true, completion: nil)
     }
     

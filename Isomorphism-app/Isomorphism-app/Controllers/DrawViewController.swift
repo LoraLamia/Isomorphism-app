@@ -40,7 +40,7 @@ class DrawViewController: UIViewController {
     }
     
     @objc func checkIsomorphism() {
-        var alg: AlgorithmCertificatesTrees?
+        var alg: GraphIsomorphismAlgorithm?
         var message: String?
         
         if !graphCanvasView.graphOne.isTree() || !graphCanvasView.graphTwo.isTree() {
