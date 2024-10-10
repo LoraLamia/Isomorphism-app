@@ -5,6 +5,7 @@ class WelcomeViewController: UIViewController {
     var drawButton = UIButton()
     var matrixButton = UIButton()
     var welcomeLabel = UILabel()
+    let imageView = UIImageView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +29,19 @@ class WelcomeViewController: UIViewController {
         matrixButton.autoPinEdge(.leading, to: .leading, of: view, withOffset: 20)
         matrixButton.autoPinEdge(.trailing, to: .trailing, of: view, withOffset: -20)
         matrixButton.autoSetDimension(.height, toSize: 50)
+        
+        imageView.autoPinEdge(.top, to: .bottom, of: matrixButton, withOffset: 20)
+        imageView.autoAlignAxis(toSuperviewAxis: .vertical)
+        imageView.autoSetDimensions(to: CGSize(width: 270, height: 270))
     }
     
     func editViews() {
+        welcomeLabel.text = "Choose the way of inserting your graphs!"
+        welcomeLabel.textColor = UIColor(red: 0, green: 0, blue: 0.6, alpha: 0.2)
+        welcomeLabel.font = UIFont.boldSystemFont(ofSize: 50)
+        welcomeLabel.numberOfLines = 0
+        view.addSubview(welcomeLabel)
+        
         drawButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         drawButton.backgroundColor = UIColor.systemBlue
         drawButton.layer.cornerRadius = 10
@@ -53,11 +64,11 @@ class WelcomeViewController: UIViewController {
         matrixButton.layer.masksToBounds = false
         view.addSubview(matrixButton)
         
-        welcomeLabel.text = "Choose the way of inserting your graphs!"
-        welcomeLabel.textColor = UIColor(red: 0, green: 0, blue: 0.6, alpha: 0.2)
-        welcomeLabel.font = UIFont.boldSystemFont(ofSize: 50)
-        welcomeLabel.numberOfLines = 0
-        view.addSubview(welcomeLabel)
+        if let image = UIImage(named: "graphs") {
+            imageView.image = image
+        }
+        imageView.contentMode = .scaleAspectFit
+        view.addSubview(imageView)
         
         drawButton.addTarget(self, action: #selector(vertexEdgeButtonTapped), for: .touchUpInside)
         matrixButton.addTarget(self, action: #selector(matrixButtonTapped), for: .touchUpInside)
