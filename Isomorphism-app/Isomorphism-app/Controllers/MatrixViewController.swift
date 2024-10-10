@@ -307,7 +307,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
 
         if let firstLine = lines.first {
             let boldAttributes: [NSAttributedString.Key: Any] = [
-                .font: UIFont.boldSystemFont(ofSize: 18)
+                .font: UIFont.boldSystemFont(ofSize: 20)
             ]
             
             attributedMessage.append(NSAttributedString(string: firstLine, attributes: boldAttributes))
