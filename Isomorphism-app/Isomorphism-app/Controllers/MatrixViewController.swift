@@ -10,19 +10,17 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
     var generateButton: UIButton!
     var processButton: UIButton!
     var scrollView: UIScrollView!
-    let popupView = PopUpView()
-    
     var graphOne: Graph!
     var graphTwo: Graph!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        scrollAndPopupViewSetUp()
+        scrollViewSetUp()
         setupMatrixSizeFields()
     }
     
-    private func scrollAndPopupViewSetUp() {
+    private func scrollViewSetUp() {
         scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
@@ -32,12 +30,6 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        
-        popupView.confirmButton.addTarget(self, action: #selector(processInputMatrices), for: .touchUpInside)
-        
-        view.addSubview(popupView)
-        popupView.isHidden = true
-        popupView.autoPinEdgesToSuperviewEdges()
     }
     
     func setupMatrixSizeFields() {
@@ -180,7 +172,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         processButton.layer.shadowRadius = 5
         processButton.layer.shadowOpacity = 0.5
         processButton.layer.masksToBounds = false
-        processButton.addTarget(self, action: #selector(checkIsomorphism), for: .touchUpInside)
+        processButton.addTarget(self, action: #selector(processInputMatrices), for: .touchUpInside)
         scrollView.addSubview(processButton)
         
         processButton.autoPinEdge(.top, to: .bottom, of: inputMatrixViewTwo, withOffset: 20)
@@ -255,10 +247,6 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
 
         self.view.layoutIfNeeded()
     }
-    
-    @objc func checkIsomorphism() {
-        popupView.isHidden = false
-    }
 
     @objc func processInputMatrices() {
         guard let sizeOne = matrixSizeFieldOne.text.flatMap(Int.init),
@@ -277,18 +265,11 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         graphOne.cleanUpDoubleEdges()
         graphTwo.cleanUpDoubleEdges()
         
-        let selectionIndex = popupView.picker.selectedRow(inComponent: 0)
-        let selection = popupView.choices[selectionIndex]
-        
         var alg: GraphIsomorphismAlgorithm?
         var message: String?
-        if(selection == "Invarijants algorithm") {
-            alg = AlgorithmInvariantInducingFunctions(graphOne: graphOne, graphTwo: graphTwo)
-        } else if(selection == "Certificates algorithm") {
-            if(!graphOne.isTree() || !graphTwo.isTree()) {
-            } else {
-                alg = AlgorithmCertificates(graphOne: graphOne, graphTwo: graphTwo)
-            }
+        if(!graphOne.isTree() || !graphTwo.isTree()) {
+        } else {
+            alg = AlgorithmCertificates(graphOne: graphOne, graphTwo: graphTwo)
         }
         
         if let alg = alg {
@@ -313,8 +294,6 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         }
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
-        
-        popupView.isHidden = true
     }
     
     func parseMatrix(from matrixView: UIView, size: Int, startingTag: Int) -> [[Int]] {

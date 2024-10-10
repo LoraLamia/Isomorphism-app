@@ -4,7 +4,6 @@ import PureLayout
 class DrawViewController: UIViewController {
     var graphCanvasView: GraphCanvasView!
     var checkButton: UIButton!
-    let popupView = PopUpView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +29,6 @@ class DrawViewController: UIViewController {
         checkButton.layer.masksToBounds = false
         view.addSubview(checkButton)
         checkButton.addTarget(self, action: #selector(checkIsomorphism), for: .touchUpInside)
-        popupView.confirmButton.addTarget(self, action: #selector(selectAlgorithm), for: .touchUpInside)
-        
-        view.addSubview(popupView)
-        popupView.isHidden = true
     }
     
     func setupConstraints() {
@@ -42,27 +37,14 @@ class DrawViewController: UIViewController {
         checkButton.autoAlignAxis(toSuperviewAxis: .vertical)
         checkButton.autoPinEdge(.top, to: .bottom, of: graphCanvasView)
         checkButton.autoSetDimensions(to: CGSize(width: 200, height: 50))
-        
-        popupView.autoPinEdgesToSuperviewEdges()
     }
     
     @objc func checkIsomorphism() {
-        popupView.isHidden = false
-    }
-    
-    @objc func selectAlgorithm() {
-        let selectionIndex = popupView.picker.selectedRow(inComponent: 0)
-        let selection = popupView.choices[selectionIndex]
-        
         var alg: GraphIsomorphismAlgorithm?
         var message: String?
-        if(selection == "Invarijants algorithm") {
-            alg = AlgorithmInvariantInducingFunctions(graphOne: graphCanvasView.graphOne, graphTwo: graphCanvasView.graphTwo)
-        } else if(selection == "Certificates algorithm") {
-            if(!graphCanvasView.graphOne.isTree() || !graphCanvasView.graphTwo.isTree()) {
-            } else {
-                alg = AlgorithmCertificates(graphOne: graphCanvasView.graphOne, graphTwo: graphCanvasView.graphTwo)
-            }
+        if(!graphCanvasView.graphOne.isTree() || !graphCanvasView.graphTwo.isTree()) {
+        } else {
+            alg = AlgorithmCertificates(graphOne: graphCanvasView.graphOne, graphTwo: graphCanvasView.graphTwo)
         }
         
         if let alg = alg {
@@ -87,8 +69,6 @@ class DrawViewController: UIViewController {
         }
         alert.addAction(okAction)
         self.present(alert, animated: true, completion: nil)
-        
-        popupView.isHidden = true
     }
     
     

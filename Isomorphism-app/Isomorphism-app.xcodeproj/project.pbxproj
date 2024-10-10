@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		35328E732B5B9A570029CD58 /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35328E722B5B9A570029CD58 /* PopUpView.swift */; };
 		35B4E4A52B3D847300659F22 /* MatrixViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4E4A42B3D847300659F22 /* MatrixViewController.swift */; };
 		35B4E4A72B3DD7DA00659F22 /* ClasificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4E4A62B3DD7DA00659F22 /* ClasificationViewController.swift */; };
 		35B93D5D2B3C11260085411F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D5C2B3C11260085411F /* AppDelegate.swift */; };
@@ -26,7 +25,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		35328E722B5B9A570029CD58 /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
 		35B4E4A42B3D847300659F22 /* MatrixViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixViewController.swift; sourceTree = "<group>"; };
 		35B4E4A62B3DD7DA00659F22 /* ClasificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClasificationViewController.swift; sourceTree = "<group>"; };
 		35B93D592B3C11260085411F /* Isomorphism-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Isomorphism-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,7 +101,6 @@
 			isa = PBXGroup;
 			children = (
 				35B93D822B3C1ED30085411F /* GraphCanvasView.swift */,
-				35328E722B5B9A570029CD58 /* PopUpView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -205,7 +202,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				35B93D892B3C79370085411F /* WelcomeViewController.swift in Sources */,
-				35328E732B5B9A570029CD58 /* PopUpView.swift in Sources */,
 				35B93D612B3C11260085411F /* DrawViewController.swift in Sources */,
 				35B93D832B3C1ED30085411F /* GraphCanvasView.swift in Sources */,
 				35B93D7D2B3C1E0A0085411F /* Edge.swift in Sources */,
