@@ -82,7 +82,7 @@ class Graph {
             }
             return true
         }
-
+        
         for value in sortedKeys {
             res.append(dict[value]!)
         }
@@ -150,7 +150,7 @@ extension Graph {
                 onlyGoodEdges.append(edge)
             }
         }
-                    
+        
         self.edges = onlyGoodEdges
     }
 }
@@ -160,7 +160,7 @@ extension Graph {
         guard !vertices.isEmpty else {
             return false
         }
-
+        
         var visited = Set<Vertex>()
         if hasCycle(vertex: vertices[0], visited: &visited, parent: nil) {
             return false
@@ -169,13 +169,13 @@ extension Graph {
         print("Graf je povezan: \(visited.count == vertices.count)")
         return visited.count == vertices.count
     }
-
+    
     private func hasCycle(vertex: Vertex, visited: inout Set<Vertex>, parent: Vertex?) -> Bool {
         visited.insert(vertex)
-
+        
         for edge in edges where edge.from == vertex || edge.to == vertex {
             let neighbour = (edge.from == vertex) ? edge.to : edge.from
-
+            
             if visited.contains(neighbour) {
                 if neighbour != parent {
                     return true
@@ -199,6 +199,28 @@ extension Graph {
         graph.edges = self.edges
         graph.vertices = self.vertices
         return graph
+    }
+}
+
+extension Graph {
+    func DT(of vertex: Vertex, in block: [Vertex]) -> Int {
+        var count = 0
+        
+        // Iteriramo kroz svaki vrh u bloku T
+        for v in block {
+            // Ako je vrh v susjedan vertex-u, povećaj brojač
+            if areAdjacent(vertex, v) {
+                count += 1
+            }
+        }
+        
+        return count
+    }
+    
+    func areAdjacent(_ u: Vertex, _ v: Vertex) -> Bool {
+        return edges.contains { (edge) in
+            (edge.from == u && edge.to == v) || (edge.from == v && edge.to == u)
+        }
     }
 }
 
