@@ -44,6 +44,7 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
     func refine(G: Graph, A: [[Vertex]]) {
         var B = A  // Postavljamo B jednako A
         var S = [[Vertex]]()  // Inicijaliziramo S kao listu blokova iz B
+        var first = true
         
         // Kopiramo blokove iz B u S
         for block in B {
@@ -71,7 +72,9 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
                     // Stavimo vrh u odgovarajući blok L[degreeInT]
                     L[degreeInT].append(vertex)
                 }
-                
+                for i in L.indices {
+                    print("\(L[i]) ")
+                }
                 // Pronađi sve neprazne blokove u L
                 let nonEmptyBlocks = L.filter { !$0.isEmpty }
                 
@@ -79,24 +82,35 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
                 if nonEmptyBlocks.count > 1 {
                     // Korak 8: Zamijenimo blok B[i] s prvim nepraznim blokom
                     B[i] = nonEmptyBlocks[0]
+                    if first {
+                        S.insert(nonEmptyBlocks[0], at: 0)
+                    } else {
+                        S.append(nonEmptyBlocks[0])
+                    }
                     
                     // Korak 9: Dodajemo ostale neprazne blokove u B i S ako nisu već dodani
+                    var j = i
                     for h in 1..<nonEmptyBlocks.count {
+                        j += 1
+                        print("h: \(h)")
                         // Provjeri da li već postoji blok u B prije dodavanja
                         if !B.contains(where: { $0 == nonEmptyBlocks[h] }) {
-                            B.insert(nonEmptyBlocks[h], at: i + h)
+                            B.insert(nonEmptyBlocks[h], at: j)
                         }
                         
                         // Provjeri da li već postoji blok u S prije dodavanja
                         if !S.contains(where: { $0 == nonEmptyBlocks[h] }) {
-                            S.append(nonEmptyBlocks[h])
+                            if first {
+                                S.insert(nonEmptyBlocks[h], at: 0)
+                            } else {
+                                S.append(nonEmptyBlocks[h])
+                            }
                         }
                     }
+                    first = false
                 }
             }
-            
-            B.sort { ($0.first?.id ?? Int.max) < ($1.first?.id ?? Int.max) }
-            
+                    
             // Ispisujemo trenutnu verziju particije B nakon svake iteracije
             print("Trenutna particija B: ")
             for (index, block) in B.enumerated() {
@@ -104,7 +118,12 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
                 print("Blok \(index): \(blockIds)")
             }
             print("--------------")
-            
+            print("Trenutna particija S: ")
+            for (index, block) in S.enumerated() {
+                let blockIds = block.map { $0.id }  // Pretvaramo vrhove u njihove ID-eve za jednostavniji ispis
+                print("Blok \(index): \(blockIds)")
+            }
+            print("--------------")
             // Provjera: Ako je S prazna ili nema više promjena, prekini petlju
             if S.isEmpty {
                 break
@@ -114,6 +133,12 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
         // Konačni ispis ekvidistantne particije B
         print("Konačna ekvidistantna particija B:")
         for (index, block) in B.enumerated() {
+            let blockIds = block.map { $0.id }  // Pretvaramo vrhove u njihove ID-eve za jednostavniji ispis
+            print("Blok \(index): \(blockIds)")
+        }
+        print("--------------")
+        print("Konačna ekvidistantna particija S:")
+        for (index, block) in S.enumerated() {
             let blockIds = block.map { $0.id }  // Pretvaramo vrhove u njihove ID-eve za jednostavniji ispis
             print("Blok \(index): \(blockIds)")
         }
