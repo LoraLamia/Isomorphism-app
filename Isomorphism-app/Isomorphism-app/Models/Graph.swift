@@ -206,9 +206,7 @@ extension Graph {
     func DT(of vertex: Vertex, in block: [Vertex]) -> Int {
         var count = 0
         
-        // Iteriramo kroz svaki vrh u bloku T
         for v in block {
-            // Ako je vrh v susjedan vertex-u, povećaj brojač
             if areAdjacent(vertex, v) {
                 count += 1
             }
