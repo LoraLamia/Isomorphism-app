@@ -35,12 +35,11 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
     func refine(G: Graph, A: [[Vertex]]) {
         var B = A
         var S = [[Vertex]]()
-        var first = true
         
         for block in B {
             S.append(block)
         }
-
+        
         var T: [Vertex]
         
         while !S.isEmpty {
@@ -51,70 +50,36 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
                 
                 for vertex in block {
                     let degreeInT = G.DT(of: vertex, in: T)
-                    
                     L[degreeInT].append(vertex)
                 }
-
+                
                 let nonEmptyBlocks = L.filter { !$0.isEmpty }
                 
                 if nonEmptyBlocks.count > 1 {
-
                     B[i] = nonEmptyBlocks[0]
-                    if first {
-                        S.insert(nonEmptyBlocks[0], at: 0)
-                    } else {
-                        S.append(nonEmptyBlocks[0])
-                    }
+                    S.append(nonEmptyBlocks[0])
                     
-                    var j = i
                     for h in 1..<nonEmptyBlocks.count {
-                        j += 1
-
-                        if !B.contains(where: { $0 == nonEmptyBlocks[h] }) {
-                            B.insert(nonEmptyBlocks[h], at: j)
+                        let newBlock = nonEmptyBlocks[h]
+                        
+                        if !B.contains(where: { $0 == newBlock }) {
+                            B.insert(newBlock, at: i + h)
                         }
                         
-                        if !S.contains(where: { $0 == nonEmptyBlocks[h] }) {
-                            if first {
-                                S.insert(nonEmptyBlocks[h], at: 0)
-                            } else {
-                                S.append(nonEmptyBlocks[h])
-                            }
+                        if !S.contains(where: { $0 == newBlock }) {
+                            S.append(newBlock)
                         }
                     }
-                    first = false
                 }
             }
-                    
-            print("Trenutna particija B: ")
-            for (index, block) in B.enumerated() {
-                let blockIds = block.map { $0.id }
-                print("Blok \(index): \(blockIds)")
-            }
+            
+            print("Trenutna particija B: \(B.map { $0.map { $0.id } })")
+            print("Trenutna particija S: \(S.map { $0.map { $0.id } })")
             print("--------------")
-            print("Trenutna particija S: ")
-            for (index, block) in S.enumerated() {
-                let blockIds = block.map { $0.id }
-                print("Blok \(index): \(blockIds)")
-            }
-            print("--------------")
-
-            if S.isEmpty {
-                break
-            }
         }
         
-        print("Konačna ekvidistantna particija B:")
-        for (index, block) in B.enumerated() {
-            let blockIds = block.map { $0.id }
-            print("Blok \(index): \(blockIds)")
-        }
-        print("--------------")
-        print("Konačna ekvidistantna particija S:")
-        for (index, block) in S.enumerated() {
-            let blockIds = block.map { $0.id }  
-            print("Blok \(index): \(blockIds)")
-        }
+        print("Konačna ekvidistantna particija B: \(B.map { $0.map { $0.id } })")
+        print("Konačna ekvidistantna particija S: \(S.map { $0.map { $0.id } })")
         print("--------------")
     }
     
