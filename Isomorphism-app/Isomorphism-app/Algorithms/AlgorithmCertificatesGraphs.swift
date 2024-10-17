@@ -23,21 +23,21 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
         var partition: [[Vertex]] = []
         var block = [Vertex]()
         
-        block.append(graph.vertices[0])
-        var block2 = [Vertex]()
-        for i in 1..<graph.vertices.count {
-            let vertex = graph.vertices[i]
-            block2.append(vertex)
-        }
-        partition.append(block)
-        partition.append(block2)
-        
-//        for i in 0..<graph.vertices.count {
+//        block.append(graph.vertices[0])
+//        var block2 = [Vertex]()
+//        for i in 1..<graph.vertices.count {
 //            let vertex = graph.vertices[i]
-//            block.append(vertex)
+//            block2.append(vertex)
 //        }
-//        
 //        partition.append(block)
+//        partition.append(block2)
+        
+        for i in 0..<graph.vertices.count {
+            let vertex = graph.vertices[i]
+            block.append(vertex)
+        }
+        
+        partition.append(block)
         return partition
     }
     
@@ -118,6 +118,24 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
         //index = Q.firstIndex(where: { $0.count > 1 })
         
         return [[Vertex]]()
+    }
+    
+    func cert(G: Graph) -> Int {
+        var startPart = initializePartition(for: G)
+        var best = canon(G: G, P: startPart)
+        var C = 0
+        var k = 0
+        
+        for j in (1..<G.vertices.count).reversed() {
+            for i in (0..<j).reversed() {
+                if(G.areAdjacent(best[i][0],best[j][0])) {
+                    C += 1 << k
+                }
+                k += 1
+            }
+        }
+        
+        return C
     }
     
     
