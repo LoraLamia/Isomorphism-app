@@ -4,12 +4,13 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
     
     var graphOne: Graph
     var graphTwo: Graph
-    var isomorphic: Bool = true
+    var bestOrdering1: [[Vertex]]
+    var bestExists = false
     
     init(graphOne: Graph, graphTwo: Graph) {
         self.graphOne = graphOne
         self.graphTwo = graphTwo
-        
+        self.bestOrdering1 = []
     }
     
     func areIsomorphic() -> Bool {
@@ -23,14 +24,14 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
         var partition: [[Vertex]] = []
         var block = [Vertex]()
         
-//        block.append(graph.vertices[0])
-//        var block2 = [Vertex]()
-//        for i in 1..<graph.vertices.count {
-//            let vertex = graph.vertices[i]
-//            block2.append(vertex)
-//        }
-//        partition.append(block)
-//        partition.append(block2)
+        //        block.append(graph.vertices[0])
+        //        var block2 = [Vertex]()
+        //        for i in 1..<graph.vertices.count {
+        //            let vertex = graph.vertices[i]
+        //            block2.append(vertex)
+        //        }
+        //        partition.append(block)
+        //        partition.append(block2)
         
         for i in 0..<graph.vertices.count {
             let vertex = graph.vertices[i]
@@ -109,26 +110,90 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
         return .equal
     }
     
-    func canon(G: Graph, P: [[Vertex]]) -> [[Vertex]] {
+    func canon(G: Graph, P: [[Vertex]]) {
+
         var Q = refine(G: G, A: P)
         
-        var bestExists = false
-        var bestPartition = Q
+        var l = Q.firstIndex(where: { $0.count > 1 })
+
+        if bestExists {
+            var pi1 = Array(repeating: Vertex(id: -1, position: CGPoint()), count: G.vertices.count)
+            for i in 0..<G.vertices.count {
+                if Q[i].count == 1 {
+                    pi1[i] = Q[i][0]
+                } else {
+                    break
+                }
+                
+            }
+
+            let Res = compare(G: G, μ: bestOrdering1, π: [pi1], n: pi1.count)
+            
+            if Res == .worse {
+                return
+            }
+        }
+        if Q.count == G.vertices.count {
+            
+            if !bestExists {
+                bestOrdering1 = Array(repeating: [Vertex](), count: G.vertices.count)
+                for i in 0..<G.vertices.count {
+                    bestOrdering1[i] = Q[i]
+                }
+                bestExists = true
+            } else {
+                
+                var pi1 = Array(repeating: Vertex(id: -1, position: CGPoint()), count: G.vertices.count)
+                for i in 0..<G.vertices.count {
+                    pi1[i] = Q[i][0]
+                }
+                
+                let Res = compare(G: G, μ: bestOrdering1, π: [pi1], n: G.vertices.count)
+                
+                if Res == .better {
+                    bestOrdering1 = Q
+                    bestExists = true
+                }
+            }
+            
+        } else {
+            if let l = l {
+                var C = Q[l]
+                var D = C
+                
+                var R = Array(repeating: [Vertex](), count: Q.count + 1)  // R je novo polje s kapacitetom
+                
+                for j in 0..<l {
+                    R[j] = Q[j]
+                }
+                
+                for j in l + 1..<Q.count {
+                    R[j + 1] = Q[j]
+                }
+                
+                for u in C {
+
+                    R[l] = [u]
+                    R[l + 1] = D.filter { $0 != u }
+                    
+                    canon(G: G, P: R)
+                }
+                    
+            }
+        }
         
-        //index = Q.firstIndex(where: { $0.count > 1 })
-        
-        return [[Vertex]]()
     }
+    
     
     func cert(G: Graph) -> Int {
         var startPart = initializePartition(for: G)
-        var best = canon(G: G, P: startPart)
+        canon(G: G, P: startPart)
         var C = 0
         var k = 0
         
         for j in (1..<G.vertices.count).reversed() {
             for i in (0..<j).reversed() {
-                if(G.areAdjacent(best[i][0],best[j][0])) {
+                if(G.areAdjacent(bestOrdering1[i][0],bestOrdering1[j][0])) {
                     C += 1 << k
                 }
                 k += 1
