@@ -6,6 +6,7 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
     var graphTwo: Graph
     var bestOrdering1: [[Vertex]]
     var bestExists = false
+    var prviProlaz = true
     
     init(graphOne: Graph, graphTwo: Graph) {
         self.graphOne = graphOne
@@ -14,8 +15,7 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
     }
     
     func areIsomorphic() -> Bool {
-        let A = initializePartition(for: graphOne)
-        var _ = refine(G: graphOne, A: A)
+        print("Certifikat je: \(cert(G: graphOne))")
         return true
     }
     
@@ -23,15 +23,15 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
     func initializePartition(for graph: Graph) -> [[Vertex]] {
         var partition: [[Vertex]] = []
         var block = [Vertex]()
-        
-        //        block.append(graph.vertices[0])
-        //        var block2 = [Vertex]()
-        //        for i in 1..<graph.vertices.count {
-        //            let vertex = graph.vertices[i]
-        //            block2.append(vertex)
-        //        }
-        //        partition.append(block)
-        //        partition.append(block2)
+//        
+//                block.append(graph.vertices[0])
+//                var block2 = [Vertex]()
+//                for i in 1..<graph.vertices.count {
+//                    let vertex = graph.vertices[i]
+//                    block2.append(vertex)
+//                }
+//                partition.append(block)
+//                partition.append(block2)
         
         for i in 0..<graph.vertices.count {
             let vertex = graph.vertices[i]
@@ -101,92 +101,89 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
                 let y = G.areAdjacent(π[i][0], π[j][0]) ? 1 : 0
                 
                 if x < y {
+                    print("worse")
                     return .worse
                 } else if x > y {
+                    print("better")
                     return .better
                 }
             }
         }
+        print("equal")
         return .equal
     }
     
     func canon(G: Graph, P: [[Vertex]]) {
-
-        var Q = refine(G: G, A: P)
+        print("Poziv funkcije canon s particijom P: \(P.map { block in block.map { $0.id } })")
+        print("Trenutno stanje bestExists: \(bestExists)")
+        let Q = refine(G: G, A: P)
         
-        var l = Q.firstIndex(where: { $0.count > 1 })
-
-        if bestExists {
-            var pi1 = Array(repeating: Vertex(id: -1, position: CGPoint()), count: G.vertices.count)
-            for i in 0..<G.vertices.count {
+        let l = Q.firstIndex(where: { $0.count > 1 }) ?? Q.count
+        
+        if bestExists == true {
+            var pi1: [[Vertex]] = []
+            for i in 0..<l {
                 if Q[i].count == 1 {
-                    pi1[i] = Q[i][0]
+                    pi1.append(Q[i])
                 } else {
                     break
                 }
-                
             }
+            print("Sadržaj najboljeg!: \(bestOrdering1.map { block in block.map { $0.id } })")
+            print("Sadržaj Q: \(Q.map { block in block.map { $0.id } })")
+            
+            print ("Sada ide poziv 1 funkcije compare: ")
+            print ("Duljina najboljeg: \(bestOrdering1.count)")
+            print ("Duljina potencijalog: \(pi1.count)")
+            
+            print("Sadržaj pi1: \(pi1.map { block in block.map { $0.id } })")
 
-            let Res = compare(G: G, μ: bestOrdering1, π: [pi1], n: pi1.count)
+            let Res = compare(G: G, μ: bestOrdering1, π: pi1, n: pi1.count)
             
             if Res == .worse {
                 return
             }
         }
         if Q.count == G.vertices.count {
-            
-            if !bestExists {
-                bestOrdering1 = Array(repeating: [Vertex](), count: G.vertices.count)
-                for i in 0..<G.vertices.count {
-                    bestOrdering1[i] = Q[i]
-                }
+            print("duljina je jednaka + drugi poziv funkcije compare")
+            if bestExists == false || compare(G: G, μ: bestOrdering1, π: Q, n: G.vertices.count) == .better {
+                bestOrdering1 = Q
                 bestExists = true
-            } else {
-                
-                var pi1 = Array(repeating: Vertex(id: -1, position: CGPoint()), count: G.vertices.count)
-                for i in 0..<G.vertices.count {
-                    pi1[i] = Q[i][0]
-                }
-                
-                let Res = compare(G: G, μ: bestOrdering1, π: [pi1], n: G.vertices.count)
-                
-                if Res == .better {
-                    bestOrdering1 = Q
-                    bestExists = true
-                }
             }
             
         } else {
-            if let l = l {
-                var C = Q[l]
-                var D = C
-                
-                var R = Array(repeating: [Vertex](), count: Q.count + 1)  // R je novo polje s kapacitetom
-                
-                for j in 0..<l {
-                    R[j] = Q[j]
-                }
-                
-                for j in l + 1..<Q.count {
-                    R[j + 1] = Q[j]
-                }
-                
-                for u in C {
-
-                    R[l] = [u]
-                    R[l + 1] = D.filter { $0 != u }
-                    
-                    canon(G: G, P: R)
-                }
-                    
+            
+            print("poziva se dijeljenje blokova")
+            
+            let C = Q[l]
+            let D = C
+            
+            var R = Array(repeating: [Vertex](), count: Q.count + 1)  // R je novo polje s kapacitetom
+            
+            for j in 0..<l {
+                R[j] = Q[j]
             }
+            
+            for j in l + 1..<Q.count {
+                R[j + 1] = Q[j]
+            }
+            
+            for u in C {
+                
+                R[l] = [u]
+                R[l + 1] = D.filter { $0 != u }
+                
+                canon(G: G, P: R)
+            }
+            
+            
         }
         
     }
     
     
     func cert(G: Graph) -> Int {
-        var startPart = initializePartition(for: G)
+        let startPart = initializePartition(for: G)
         canon(G: G, P: startPart)
         var C = 0
         var k = 0
