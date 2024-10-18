@@ -15,7 +15,13 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
     }
     
     func areIsomorphic() -> Bool {
-        print("Certifikat je: \(cert(G: graphOne))")
+        let v = cert(G: graphOne)
+        print("Certifikat je: \(v)")
+        if let decimal = binaryToDecimal(v) {
+            print("Decimalni broj je: \(decimal)")
+        } else {
+            print("Neispravan binarni broj.")
+        }
         return true
     }
     
@@ -23,7 +29,7 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
     func initializePartition(for graph: Graph) -> [[Vertex]] {
         var partition: [[Vertex]] = []
         var block = [Vertex]()
-//        
+        
 //                block.append(graph.vertices[0])
 //                var block2 = [Vertex]()
 //                for i in 1..<graph.vertices.count {
@@ -182,22 +188,42 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
     }
     
     
-    func cert(G: Graph) -> Int {
+    func cert(G: Graph) -> String {
         let startPart = initializePartition(for: G)
         canon(G: G, P: startPart)
-        var C = 0
-        var k = 0
         
-        for j in (1..<G.vertices.count).reversed() {
-            for i in (0..<j).reversed() {
+        var s = ""
+        for j in 1..<G.vertices.count {
+            for i in 0..<j {
                 if(G.areAdjacent(bestOrdering1[i][0],bestOrdering1[j][0])) {
-                    C += 1 << k
+                    s.append("1")
+                } else {
+                    s.append("0")
                 }
-                k += 1
             }
         }
         
-        return C
+        return s
+    }
+    
+    func binaryToDecimal(_ binary: String) -> Int? {
+        var decimalValue = 0
+        var exponent = 0
+
+        for digit in binary.reversed() {
+            if let bit = Int(String(digit)) {
+                if bit == 0 || bit == 1 {
+                    decimalValue += bit * Int(pow(2.0, Double(exponent)))
+                    exponent += 1
+                } else {
+                    return nil
+                }
+            } else {
+                return nil
+            }
+        }
+        
+        return decimalValue
     }
     
     
