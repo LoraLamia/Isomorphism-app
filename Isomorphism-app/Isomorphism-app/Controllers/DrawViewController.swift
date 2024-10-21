@@ -124,6 +124,8 @@ class DrawViewController: UIViewController {
 
         let okAction = UIAlertAction(title: "OK", style: .default)
         alert.addAction(okAction)
+        
+        alert.view.tintColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
 
         self.present(alert, animated: true, completion: nil)
     }

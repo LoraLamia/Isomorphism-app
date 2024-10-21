@@ -324,7 +324,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         let lines = message.components(separatedBy: "\n")
         
         let attributedMessage = NSMutableAttributedString()
-
+        
         if let firstLine = lines.first {
             let boldAttributes: [NSAttributedString.Key: Any] = [
                 .font: UIFont.boldSystemFont(ofSize: 20)
@@ -348,6 +348,8 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
 
         let okAction = UIAlertAction(title: "OK", style: .default)
         alert.addAction(okAction)
+        
+        alert.view.tintColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
 
         self.present(alert, animated: true, completion: nil)
     }

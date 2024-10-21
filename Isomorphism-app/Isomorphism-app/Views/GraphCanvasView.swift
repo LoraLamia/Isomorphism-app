@@ -31,12 +31,12 @@ class GraphCanvasView: UIView {
             drawEdge(edge, in: context)
         }
         
-        for vertex in graphOne.vertices {
-            drawVertex(vertex, in: context)
-        }
-        
         for edge in graphTwo.edges {
             drawEdge(edge, in: context)
+        }
+        
+        for vertex in graphOne.vertices {
+            drawVertex(vertex, in: context)
         }
         
         for vertex in graphTwo.vertices {
@@ -109,7 +109,7 @@ class GraphCanvasView: UIView {
         let radius: CGFloat = 10
         let circleRect = CGRect(x: vertex.position.x - radius, y: vertex.position.y - radius, width: radius * 2, height: radius * 2)
         context.addEllipse(in: circleRect)
-        context.setFillColor(UIColor.blue.cgColor)
+        context.setFillColor(UIColor(red: 60/255, green: 110/255, blue: 160/255, alpha: 1).cgColor)
         context.fillPath()
     }
 
