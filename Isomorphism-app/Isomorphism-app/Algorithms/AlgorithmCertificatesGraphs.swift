@@ -56,10 +56,12 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
             S.append(block)
         }
         
+        print("Pocetna particija S: \(S.map { $0.map { $0.id } })")
+        
         var T: [Vertex]
         
         while !S.isEmpty {
-            T = S.removeLast()
+            T = S.removeFirst()
             
             for (i, block) in B.enumerated() {
                 var L = Array(repeating: [Vertex](), count: G.vertices.count)
