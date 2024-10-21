@@ -80,12 +80,8 @@ class AlgorithmCertificatesTrees: GraphIsomorphismAlgorithm {
     }
     
     func areIsomorphic() -> Bool {
-        
         let cert = calculateCertificatesTrees()
-        if(cert.0 == cert.1) {
-            return true
-        } else {
-            return false
-        }
+        
+        return cert.0 == cert.1
     }
 }

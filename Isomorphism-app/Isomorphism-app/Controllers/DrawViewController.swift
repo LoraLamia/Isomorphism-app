@@ -43,16 +43,27 @@ class DrawViewController: UIViewController {
         var alg: GraphIsomorphismAlgorithm?
         var message: String?
         
-        if !graphCanvasView.graphOne.isTree() || !graphCanvasView.graphTwo.isTree() {
+        if !graphCanvasView.graphOne.isTree() && !graphCanvasView.graphTwo.isTree() {
             
             alg = AlgorithmCertificatesGraphs(graphOne: graphCanvasView.graphOne, graphTwo: graphCanvasView.graphTwo)
-            alg?.areIsomorphic()
-//            message = "Both graphs need to be trees!"
-//            DispatchQueue.main.async {
-//                self.presentResultAlert(message: message)
-//                self.graphCanvasView.resetGraphs()
-//            }
-        } else {
+            
+            let startTime = Date()
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+                let isomorphic = alg?.areIsomorphic() ?? false
+                
+                let endTime = Date()
+                let timeInterval = endTime.timeIntervalSince(startTime)
+                
+                message = isomorphic ? "Graphs are isomorphic!" : "Graphs are NOT isomorphic!"
+                message = "\(message!)\nDetermination time: \(String(format: "%.5f", timeInterval)) seconds"
+                
+                DispatchQueue.main.async {
+                    self.presentResultAlert(message: message)
+                    self.graphCanvasView.resetGraphs()
+                }
+            }
+        } else if graphCanvasView.graphOne.isTree() && graphCanvasView.graphTwo.isTree(){
             alg = AlgorithmCertificatesTrees(graphOne: graphCanvasView.graphOne, graphTwo: graphCanvasView.graphTwo)
             
             let startTime = Date()
@@ -70,6 +81,12 @@ class DrawViewController: UIViewController {
                     self.presentResultAlert(message: message)
                     self.graphCanvasView.resetGraphs()
                 }
+            }
+        } else {
+            message = "Graphs are NOT isomorphic because one is a Tree and other isn't!"
+            DispatchQueue.main.async {
+                self.presentResultAlert(message: message)
+                self.graphCanvasView.resetGraphs()
             }
         }
     }
