@@ -36,6 +36,11 @@ class WelcomeViewController: UIViewController {
     }
     
     func editViews() {
+        let infoButton = UIButton(type: .infoLight)
+        infoButton.addTarget(self, action: #selector(infoButtonTapped), for: .touchUpInside)
+        let barButton = UIBarButtonItem(customView: infoButton)
+        self.navigationItem.rightBarButtonItem = barButton
+        
         welcomeLabel.text = "Choose the way of inserting your graphs!"
         welcomeLabel.textColor = UIColor(red: 0, green: 0, blue: 0.6, alpha: 0.2)
         welcomeLabel.font = UIFont.boldSystemFont(ofSize: 50)
@@ -82,6 +87,11 @@ class WelcomeViewController: UIViewController {
     @objc func matrixButtonTapped() {
         let viewController = MatrixViewController()
         navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @objc func infoButtonTapped() {
+        let viewController = InfoViewController()
+        self.present(viewController, animated: true)
     }
     
 }
