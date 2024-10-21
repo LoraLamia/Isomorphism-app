@@ -19,7 +19,7 @@ class DrawViewController: UIViewController {
         checkButton = UIButton()
         checkButton.setTitle("Are isomorphic?", for: .normal)
         checkButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        checkButton.backgroundColor = UIColor.systemBlue
+        checkButton.backgroundColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
         checkButton.tintColor = UIColor.white
         checkButton.layer.cornerRadius = 10
         checkButton.layer.shadowColor = UIColor.black.cgColor
@@ -29,6 +29,7 @@ class DrawViewController: UIViewController {
         checkButton.layer.masksToBounds = false
         view.addSubview(checkButton)
         checkButton.addTarget(self, action: #selector(checkIsomorphism), for: .touchUpInside)
+        navigationController?.navigationBar.tintColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
     }
     
     func setupConstraints() {

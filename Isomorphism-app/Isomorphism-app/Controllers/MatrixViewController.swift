@@ -16,6 +16,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationController?.navigationBar.tintColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
         scrollViewSetUp()
         setupMatrixSizeFields()
     }
@@ -47,7 +48,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         
         generateButton = UIButton()
         generateButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        generateButton.backgroundColor = UIColor.systemBlue
+        generateButton.backgroundColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
         generateButton.setTitleColor(.white, for: .normal)
         generateButton.layer.cornerRadius = 10
         generateButton.setTitle("Generate matrix fields", for: .normal)
@@ -163,7 +164,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         scrollView.contentSize = CGSize(width: view.frame.width, height: contentHeight)
         
         processButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        processButton.backgroundColor = UIColor.systemBlue
+        processButton.backgroundColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
         processButton.setTitleColor(.white, for: .normal)
         processButton.layer.cornerRadius = 10
         processButton.setTitle("Are isomorphic?", for: .normal)

@@ -36,19 +36,23 @@ class WelcomeViewController: UIViewController {
     }
     
     func editViews() {
-        let infoButton = UIButton(type: .infoLight)
+        let infoButton = UIButton(type: .system)
+        let infoImage = UIImage(systemName: "info.circle")
+        infoButton.setImage(infoImage, for: .normal)
+        infoButton.tintColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8) // Set the desired color
         infoButton.addTarget(self, action: #selector(infoButtonTapped), for: .touchUpInside)
+        
         let barButton = UIBarButtonItem(customView: infoButton)
         self.navigationItem.rightBarButtonItem = barButton
         
         welcomeLabel.text = "Choose the way of inserting your graphs!"
-        welcomeLabel.textColor = UIColor(red: 0, green: 0, blue: 0.6, alpha: 0.2)
+        welcomeLabel.textColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.3)
         welcomeLabel.font = UIFont.boldSystemFont(ofSize: 50)
         welcomeLabel.numberOfLines = 0
         view.addSubview(welcomeLabel)
         
         drawButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        drawButton.backgroundColor = UIColor.systemBlue
+        drawButton.backgroundColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
         drawButton.layer.cornerRadius = 10
         drawButton.setTitle("Draw graphs", for: .normal)
         drawButton.layer.shadowColor = UIColor.black.cgColor
@@ -59,7 +63,7 @@ class WelcomeViewController: UIViewController {
         view.addSubview(drawButton)
         
         matrixButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        matrixButton.backgroundColor = UIColor.systemBlue
+        matrixButton.backgroundColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
         matrixButton.layer.cornerRadius = 10
         matrixButton.setTitle("Insert graphs matrices", for: .normal)
         matrixButton.layer.shadowColor = UIColor.black.cgColor
