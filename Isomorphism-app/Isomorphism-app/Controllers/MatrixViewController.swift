@@ -268,13 +268,26 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         var alg: GraphIsomorphismAlgorithm?
         var message: String?
         
-        if !graphOne.isTree() || !graphTwo.isTree() {
-            message = "Both graphs need to be trees!"
-            DispatchQueue.main.async {
-                self.presentResultAlert(message: message)
-                self.resetViewController()
+        if !graphOne.isTree() && !graphTwo.isTree() {
+            alg = AlgorithmCertificatesGraphs(graphOne: graphOne, graphTwo: graphTwo)
+            
+            let startTime = Date()
+            
+            DispatchQueue.global(qos: .userInitiated).async {
+                let isomorphic = alg?.areIsomorphic() ?? false
+                
+                let endTime = Date()
+                let timeInterval = endTime.timeIntervalSince(startTime)
+                
+                message = isomorphic ? "Graphs are isomorphic!" : "Graphs are NOT isomorphic!"
+                message = "\(message!)\nDetermination time: \(String(format: "%.5f", timeInterval)) seconds"
+                
+                DispatchQueue.main.async {
+                    self.presentResultAlert(message: message)
+                    self.resetViewController()
+                }
             }
-        } else {
+        } else if graphOne.isTree() && graphTwo.isTree() {
             alg = AlgorithmCertificatesTrees(graphOne: graphOne, graphTwo: graphTwo)
             
             let startTime = Date()
@@ -292,6 +305,12 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
                     self.presentResultAlert(message: message)
                     self.resetViewController()
                 }
+            }
+        } else {
+            message = "Graphs are NOT isomorphic because one is a Tree and other isn't!"
+            DispatchQueue.main.async {
+                self.presentResultAlert(message: message)
+                self.resetViewController()
             }
         }
     }

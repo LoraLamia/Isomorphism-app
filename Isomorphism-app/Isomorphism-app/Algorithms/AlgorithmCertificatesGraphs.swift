@@ -13,8 +13,6 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
     func areIsomorphic() -> Bool {
         let v1 = cert(G: graphOne)
         let v2 = cert(G: graphTwo)
-        print("Certifikat prvog grafa je: \(v1)")
-        print("Certifikat drugog grafa je: \(v2)")
         return v1 == v2
     }
     
