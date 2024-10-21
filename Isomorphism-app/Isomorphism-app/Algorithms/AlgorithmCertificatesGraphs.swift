@@ -4,40 +4,24 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
     
     var graphOne: Graph
     var graphTwo: Graph
-    var bestOrdering1: [[Vertex]]
-    var bestExists = false
-    var prviProlaz = true
     
     init(graphOne: Graph, graphTwo: Graph) {
         self.graphOne = graphOne
         self.graphTwo = graphTwo
-        self.bestOrdering1 = []
     }
     
     func areIsomorphic() -> Bool {
-        let v = cert(G: graphOne)
-        print("Certifikat je: \(v)")
-        if let decimal = binaryToDecimal(v) {
-            print("Decimalni broj je: \(decimal)")
-        } else {
-            print("Neispravan binarni broj.")
-        }
-        return true
+        let v1 = cert(G: graphOne)
+        let v2 = cert(G: graphTwo)
+        print("Certifikat prvog grafa je: \(v1)")
+        print("Certifikat drugog grafa je: \(v2)")
+        return v1 == v2
     }
     
     
     func initializePartition(for graph: Graph) -> [[Vertex]] {
         var partition: [[Vertex]] = []
         var block = [Vertex]()
-        
-//                block.append(graph.vertices[0])
-//                var block2 = [Vertex]()
-//                for i in 1..<graph.vertices.count {
-//                    let vertex = graph.vertices[i]
-//                    block2.append(vertex)
-//                }
-//                partition.append(block)
-//                partition.append(block2)
         
         for i in 0..<graph.vertices.count {
             let vertex = graph.vertices[i]
@@ -55,8 +39,6 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
         for block in B {
             S.append(block)
         }
-        
-        print("Pocetna particija S: \(S.map { $0.map { $0.id } })")
         
         var T: [Vertex]
         
@@ -90,15 +72,8 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
                     }
                 }
             }
-            
-            print("Trenutna particija B: \(B.map { $0.map { $0.id } })")
-            print("Trenutna particija S: \(S.map { $0.map { $0.id } })")
-            print("--------------")
         }
         
-        print("Konačna ekvidistantna particija B: \(B.map { $0.map { $0.id } })")
-        print("Konačna ekvidistantna particija S: \(S.map { $0.map { $0.id } })")
-        print("--------------")
         return B
     }
     
@@ -109,26 +84,24 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
                 let y = G.areAdjacent(π[i][0], π[j][0]) ? 1 : 0
                 
                 if x < y {
-                    print("worse")
                     return .worse
                 } else if x > y {
-                    print("better")
                     return .better
                 }
             }
         }
-        print("equal")
         return .equal
     }
     
-    func canon(G: Graph, P: [[Vertex]]) {
-        print("Poziv funkcije canon s particijom P: \(P.map { block in block.map { $0.id } })")
-        print("Trenutno stanje bestExists: \(bestExists)")
+    func canon(G: Graph, P: [[Vertex]], currentBestOrdering: [[Vertex]], currentBestExists: Bool) -> ([[Vertex]], Bool) {
+        var bestOrdering = currentBestOrdering
+        var bestExists = currentBestExists
+        
         let Q = refine(G: G, A: P)
         
         let l = Q.firstIndex(where: { $0.count > 1 }) ?? Q.count
         
-        if bestExists == true {
+        if bestExists {
             var pi1: [[Vertex]] = []
             for i in 0..<l {
                 if Q[i].count == 1 {
@@ -137,36 +110,24 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
                     break
                 }
             }
-            print("Sadržaj najboljeg!: \(bestOrdering1.map { block in block.map { $0.id } })")
-            print("Sadržaj Q: \(Q.map { block in block.map { $0.id } })")
-            
-            print ("Sada ide poziv 1 funkcije compare: ")
-            print ("Duljina najboljeg: \(bestOrdering1.count)")
-            print ("Duljina potencijalog: \(pi1.count)")
-            
-            print("Sadržaj pi1: \(pi1.map { block in block.map { $0.id } })")
 
-            let Res = compare(G: G, μ: bestOrdering1, π: pi1, n: pi1.count)
+            let Res = compare(G: G, μ: bestOrdering, π: pi1, n: pi1.count)
             
             if Res == .worse {
-                return
+                return (bestOrdering, bestExists)
             }
         }
+        
         if Q.count == G.vertices.count {
-            print("duljina je jednaka + drugi poziv funkcije compare")
-            if bestExists == false || compare(G: G, μ: bestOrdering1, π: Q, n: G.vertices.count) == .better {
-                bestOrdering1 = Q
+            if !bestExists || compare(G: G, μ: bestOrdering, π: Q, n: G.vertices.count) == .better {
+                bestOrdering = Q
                 bestExists = true
             }
-            
         } else {
-            
-            print("poziva se dijeljenje blokova")
-            
             let C = Q[l]
             let D = C
             
-            var R = Array(repeating: [Vertex](), count: Q.count + 1)  // R je novo polje s kapacitetom
+            var R = Array(repeating: [Vertex](), count: Q.count + 1)
             
             for j in 0..<l {
                 R[j] = Q[j]
@@ -177,58 +138,40 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
             }
             
             for u in C {
-                
                 R[l] = [u]
                 R[l + 1] = D.filter { $0 != u }
                 
-                canon(G: G, P: R)
-            }
-            
-            
-        }
-        
-    }
-    
-    
-    func cert(G: Graph) -> String {
-        let startPart = initializePartition(for: G)
-        canon(G: G, P: startPart)
-        
-        var s = ""
-        for j in 1..<G.vertices.count {
-            for i in 0..<j {
-                if(G.areAdjacent(bestOrdering1[i][0],bestOrdering1[j][0])) {
-                    s.append("1")
-                } else {
-                    s.append("0")
+                let (tempBestOrdering, tempBestExists) = canon(G: G, P: R, currentBestOrdering: bestOrdering, currentBestExists: bestExists)
+                
+                if tempBestExists && (!bestExists || compare(G: G, μ: bestOrdering, π: tempBestOrdering, n: G.vertices.count) == .better) {
+                    bestOrdering = tempBestOrdering
+                    bestExists = tempBestExists
                 }
             }
         }
         
-        return s
+        return (bestOrdering, bestExists)
     }
-    
-    func binaryToDecimal(_ binary: String) -> Int? {
-        var decimalValue = 0
-        var exponent = 0
 
-        for digit in binary.reversed() {
-            if let bit = Int(String(digit)) {
-                if bit == 0 || bit == 1 {
-                    decimalValue += bit * Int(pow(2.0, Double(exponent)))
-                    exponent += 1
-                } else {
-                    return nil
+    
+    
+    func cert(G: Graph) -> Int {
+        let startPart = initializePartition(for: G)
+        let (finalOrdering, _) = canon(G: G, P: startPart, currentBestOrdering: [], currentBestExists: false)
+        
+        var C = 0
+        var k = 0
+        for j in (1..<G.vertices.count).reversed() {
+            for i in (0..<j).reversed() {
+                if G.areAdjacent(finalOrdering[i][0], finalOrdering[j][0]) {
+                    C += 1 << k 
                 }
-            } else {
-                return nil
+                k += 1
             }
         }
-        
-        return decimalValue
+        return C
     }
-    
-    
+
     
 }
 
