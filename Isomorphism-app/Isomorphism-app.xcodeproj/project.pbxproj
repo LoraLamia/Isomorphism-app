@@ -20,7 +20,6 @@
 		35B93D812B3C1E880085411F /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D802B3C1E880085411F /* Graph.swift */; };
 		35B93D832B3C1ED30085411F /* GraphCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D822B3C1ED30085411F /* GraphCanvasView.swift */; };
 		35B93D892B3C79370085411F /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D882B3C79370085411F /* WelcomeViewController.swift */; };
-		35C923172B473D7500584BE9 /* AlgorithmInvariantInducingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C923162B473D7500584BE9 /* AlgorithmInvariantInducingFunctions.swift */; };
 		35FE3C912B4F7F0C00F68766 /* AlgorithmCertificatesTrees.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FE3C902B4F7F0C00F68766 /* AlgorithmCertificatesTrees.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,7 +38,6 @@
 		35B93D802B3C1E880085411F /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		35B93D822B3C1ED30085411F /* GraphCanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCanvasView.swift; sourceTree = "<group>"; };
 		35B93D882B3C79370085411F /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		35C923162B473D7500584BE9 /* AlgorithmInvariantInducingFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmInvariantInducingFunctions.swift; sourceTree = "<group>"; };
 		35FE3C902B4F7F0C00F68766 /* AlgorithmCertificatesTrees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmCertificatesTrees.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,7 +106,6 @@
 		35B93D792B3C1DD50085411F /* Algorithms */ = {
 			isa = PBXGroup;
 			children = (
-				35C923162B473D7500584BE9 /* AlgorithmInvariantInducingFunctions.swift */,
 				35FE3C902B4F7F0C00F68766 /* AlgorithmCertificatesTrees.swift */,
 				35752D312CB7CB2A00E1A60F /* AlgorithmCertificatesGraphs.swift */,
 			);
@@ -209,7 +206,6 @@
 				35B93D812B3C1E880085411F /* Graph.swift in Sources */,
 				35B93D5D2B3C11260085411F /* AppDelegate.swift in Sources */,
 				35B93D5F2B3C11260085411F /* SceneDelegate.swift in Sources */,
-				35C923172B473D7500584BE9 /* AlgorithmInvariantInducingFunctions.swift in Sources */,
 				35B93D7B2B3C1DFF0085411F /* Vertex.swift in Sources */,
 				35B4E4A52B3D847300659F22 /* MatrixViewController.swift in Sources */,
 				35FE3C912B4F7F0C00F68766 /* AlgorithmCertificatesTrees.swift in Sources */,

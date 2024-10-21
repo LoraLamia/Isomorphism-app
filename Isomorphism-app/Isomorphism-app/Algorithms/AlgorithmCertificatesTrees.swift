@@ -1,5 +1,9 @@
 import Foundation
 
+protocol GraphIsomorphismAlgorithm {
+    func areIsomorphic() -> Bool
+}
+
 class AlgorithmCertificatesTrees: GraphIsomorphismAlgorithm {
     
     var graphOne: Graph
