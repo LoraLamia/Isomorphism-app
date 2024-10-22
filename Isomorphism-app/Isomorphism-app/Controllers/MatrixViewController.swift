@@ -251,17 +251,11 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         inputMatrixViewOne?.removeFromSuperview()
         inputMatrixViewTwo?.removeFromSuperview()
         
-//        inputMatrixViewOne = createMatrixInputFields(size: 0, tag: 100)
-//        inputMatrixViewTwo = createMatrixInputFields(size: 0, tag: 200)
-        
         graphOne = Graph()
         graphTwo = Graph()
         
         generateButton?.isHidden = false
         processButton?.isHidden = true
-        
-        self.scrollView.setContentOffset(CGPoint.zero, animated: false)
-        scrollView.contentSize = CGSize(width: view.frame.width, height: 20)
 
         self.view.layoutIfNeeded()
     }
