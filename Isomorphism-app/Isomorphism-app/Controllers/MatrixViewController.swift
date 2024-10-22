@@ -68,9 +68,26 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
     
     private func createMatrixSizeField(placeholder: String) -> UITextField {
         let textField = UITextField()
-        textField.borderStyle = .roundedRect
+        textField.borderStyle = .none
         textField.placeholder = placeholder
         textField.keyboardType = .numberPad
+        textField.textAlignment = .center
+        textField.backgroundColor = UIColor(red: 240/255, green: 248/255, blue: 255/255, alpha: 1.0)
+        textField.layer.cornerRadius = 18
+        textField.layer.masksToBounds = true
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8).cgColor
+        textField.font = UIFont.systemFont(ofSize: 18)
+        
+        textField.autoSetDimension(.height, toSize: 40)
+        textField.autoSetDimension(.width, toSize: 220)
+        // Dodavanje senke za efekat lebdenja
+        textField.layer.shadowColor = UIColor.black.cgColor
+        textField.layer.shadowOffset = CGSize(width: 0, height: 2)
+        textField.layer.shadowRadius = 4
+        textField.layer.shadowOpacity = 0.3
+        textField.layer.masksToBounds = false
+        
         return textField
     }
     
