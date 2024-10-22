@@ -10,6 +10,7 @@
 		35752D322CB7CB2A00E1A60F /* AlgorithmCertificatesGraphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35752D312CB7CB2A00E1A60F /* AlgorithmCertificatesGraphs.swift */; };
 		358992B92CC66248009DC1CD /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358992B82CC66248009DC1CD /* InfoViewController.swift */; };
 		358992BB2CC66FA1009DC1CD /* GraphBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358992BA2CC66FA0009DC1CD /* GraphBackgroundView.swift */; };
+		358992BD2CC781E0009DC1CD /* MatrixUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 358992BC2CC781E0009DC1CD /* MatrixUIButton.swift */; };
 		35B4E4A52B3D847300659F22 /* MatrixViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B4E4A42B3D847300659F22 /* MatrixViewController.swift */; };
 		35B93D5D2B3C11260085411F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D5C2B3C11260085411F /* AppDelegate.swift */; };
 		35B93D5F2B3C11260085411F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B93D5E2B3C11260085411F /* SceneDelegate.swift */; };
@@ -29,6 +30,7 @@
 		35752D312CB7CB2A00E1A60F /* AlgorithmCertificatesGraphs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmCertificatesGraphs.swift; sourceTree = "<group>"; };
 		358992B82CC66248009DC1CD /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		358992BA2CC66FA0009DC1CD /* GraphBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphBackgroundView.swift; sourceTree = "<group>"; };
+		358992BC2CC781E0009DC1CD /* MatrixUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixUIButton.swift; sourceTree = "<group>"; };
 		35B4E4A42B3D847300659F22 /* MatrixViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixViewController.swift; sourceTree = "<group>"; };
 		35B93D592B3C11260085411F /* Isomorphism-app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Isomorphism-app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		35B93D5C2B3C11260085411F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			children = (
 				35B93D822B3C1ED30085411F /* GraphCanvasView.swift */,
 				358992BA2CC66FA0009DC1CD /* GraphBackgroundView.swift */,
+				358992BC2CC781E0009DC1CD /* MatrixUIButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				35B93D5D2B3C11260085411F /* AppDelegate.swift in Sources */,
 				35B93D5F2B3C11260085411F /* SceneDelegate.swift in Sources */,
 				35B93D7B2B3C1DFF0085411F /* Vertex.swift in Sources */,
+				358992BD2CC781E0009DC1CD /* MatrixUIButton.swift in Sources */,
 				35B4E4A52B3D847300659F22 /* MatrixViewController.swift in Sources */,
 				358992B92CC66248009DC1CD /* InfoViewController.swift in Sources */,
 				35FE3C912B4F7F0C00F68766 /* AlgorithmCertificatesTrees.swift in Sources */,
