@@ -93,6 +93,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
                 ]
             )
             alert.setValue(attributedMessage, forKey: "attributedMessage")
+            alert.view.tintColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
             
             let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
                 self?.resetViewController()
@@ -115,6 +116,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
                 ]
             )
             alert.setValue(attributedMessage, forKey: "attributedMessage")
+            alert.view.tintColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
             
             let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
                 self?.resetViewController()
@@ -186,44 +188,42 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
     private func createMatrixInputFields(size: Int, tag: Int) -> UIView {
         let matrixView = UIView()
         
-        var previousTextField: UITextField?
+        var previousButton: MatrixUIButton?
         
         for i in 0..<size {
             for j in 0..<size {
-                let textField = UITextField()
-                textField.borderStyle = .roundedRect
-                textField.keyboardType = .numberPad
-                textField.tag = tag + (i * size) + j
-                matrixView.addSubview(textField)
+                let button = MatrixUIButton()
+                button.tag = tag + (i * size) + j
+                matrixView.addSubview(button)
                 
-                textField.autoSetDimensions(to: CGSize(width: 40, height: 40))
+                button.autoSetDimensions(to: CGSize(width: 40, height: 40))
                 
-                if j == 0 { //first column
-                    textField.autoPinEdge(toSuperviewEdge: .leading)
+                if j == 0 { // Prva kolona
+                    button.autoPinEdge(toSuperviewEdge: .leading)
                 } else {
-                    textField.autoPinEdge(.leading, to: .trailing, of: previousTextField!)
+                    button.autoPinEdge(.leading, to: .trailing, of: previousButton!)
                 }
                 
-                if i == 0 { //first row
-                    textField.autoPinEdge(toSuperviewEdge: .top)
+                if i == 0 { // Prvi red
+                    button.autoPinEdge(toSuperviewEdge: .top)
                 } else {
-                    //align textField to the one above it
-                    if let aboveTextField = matrixView.viewWithTag(textField.tag - size) as? UITextField {
-                        textField.autoPinEdge(.top, to: .bottom, of: aboveTextField)
+                    // Poravnanje s dugmetom iznad
+                    if let aboveButton = matrixView.viewWithTag(button.tag - size) as? MatrixUIButton {
+                        button.autoPinEdge(.top, to: .bottom, of: aboveButton)
                     }
                 }
                 
-                previousTextField = textField
+                previousButton = button
                 
-                if j == size - 1 { //last column
-                    textField.autoPinEdge(toSuperviewEdge: .trailing)
+                if j == size - 1 { // Posljednja kolona
+                    button.autoPinEdge(toSuperviewEdge: .trailing)
                 }
                 
-                if i == size - 1 { //last row
-                    textField.autoPinEdge(toSuperviewEdge: .bottom)
+                if i == size - 1 { // Posljednji red
+                    button.autoPinEdge(toSuperviewEdge: .bottom)
                 }
             }
-            previousTextField = nil
+            previousButton = nil
         }
         return matrixView
     }
@@ -343,14 +343,14 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
             ]
             attributedMessage.append(NSAttributedString(string: lines[1], attributes: regularAttributes))
         }
-
+        
         alert.setValue(attributedMessage, forKey: "attributedMessage")
-
+        
         let okAction = UIAlertAction(title: "OK", style: .default)
         alert.addAction(okAction)
         
         alert.view.tintColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
-
+        
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -359,10 +359,8 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         for i in 0..<size {
             for j in 0..<size {
                 let tag = (i * size) + j + startingTag
-                if let textField = matrixView.viewWithTag(tag) as? UITextField,
-                   let text = textField.text,
-                   let value = Int(text) {
-                    matrix[i][j] = value
+                if let button = matrixView.viewWithTag(tag) as? MatrixUIButton {
+                    matrix[i][j] = button.isSelected ? 1 : 0
                 }
             }
         }
