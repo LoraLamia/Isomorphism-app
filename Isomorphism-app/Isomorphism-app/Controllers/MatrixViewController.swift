@@ -12,6 +12,8 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
     var scrollView: UIScrollView!
     var graphOne: Graph!
     var graphTwo: Graph!
+    var activityIndicator: UIActivityIndicatorView!
+    var dimmingOverlay: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,10 +62,24 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         generateButton.addTarget(self, action: #selector(generateMatrixInputFields), for: .touchUpInside)
         scrollView.addSubview(generateButton)
         
+        dimmingOverlay = UIView()
+        dimmingOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        dimmingOverlay.isHidden = true
+        view.addSubview(dimmingOverlay)
+        
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.color = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
+        
         generateButton.autoPinEdge(.top, to: .bottom, of: matrixSizeFieldTwo, withOffset: 30)
         generateButton.autoPinEdge(.leading, to: .leading, of: view, withOffset: 20)
         generateButton.autoPinEdge(.trailing, to: .trailing, of: view, withOffset: -20)
         generateButton.autoSetDimension(.height, toSize: 50)
+        
+        dimmingOverlay.autoPinEdgesToSuperviewEdges()
+        
+        activityIndicator.autoCenterInSuperview()
     }
     
     private func createMatrixSizeField(placeholder: String) -> UITextField {
@@ -278,49 +294,46 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         graphTwo.cleanUpDoubleEdges()
         
         var alg: GraphIsomorphismAlgorithm?
-        var message: String?
         
         if !graphOne.isTree() && !graphTwo.isTree() {
+            
             alg = AlgorithmCertificatesGraphs(graphOne: graphOne, graphTwo: graphTwo)
+            alertWindow(alg: alg)
             
-            let startTime = Date()
-            
-            DispatchQueue.global(qos: .userInitiated).async {
-                let isomorphic = alg?.areIsomorphic() ?? false
-                
-                let endTime = Date()
-                let timeInterval = endTime.timeIntervalSince(startTime)
-                
-                message = isomorphic ? "Grafovi su izomorfni!" : "Grafovi nisu izomorfni!"
-                message = "\(message!)\nVrijeme izvođenja: \(String(format: "%.5f", timeInterval)) sekundi"
-                
-                DispatchQueue.main.async {
-                    self.presentResultAlert(message: message)
-                    self.resetViewController()
-                }
-            }
         } else if graphOne.isTree() && graphTwo.isTree() {
+            
             alg = AlgorithmCertificatesTrees(graphOne: graphOne, graphTwo: graphTwo)
+            alertWindow(alg: alg)
             
-            let startTime = Date()
-            
-            DispatchQueue.global(qos: .userInitiated).async {
-                let isomorphic = alg?.areIsomorphic() ?? false
-                
-                let endTime = Date()
-                let timeInterval = endTime.timeIntervalSince(startTime)
-                
-                message = isomorphic ? "Grafovi su izomorfni!" : "Grafovi nisu izomorfni!"
-                message = "\(message!)\nVrijeme izvođenja: \(String(format: "%.5f", timeInterval)) sekundi"
-                
-                DispatchQueue.main.async {
-                    self.presentResultAlert(message: message)
-                    self.resetViewController()
-                }
-            }
         } else {
-            message = "Grafovi nisu izomorfni jer je jedan stablo, a drugi nije!"
+            var message = "Grafovi nisu izomorfni jer je jedan stablo, a drugi nije!"
             DispatchQueue.main.async {
+                self.presentResultAlert(message: message)
+                self.resetViewController()
+            }
+        }
+    }
+    
+    private func alertWindow(alg: GraphIsomorphismAlgorithm?) {
+        let startTime = Date()
+        var message: String?
+        
+        DispatchQueue.main.async {
+            self.dimmingOverlay.isHidden = false
+            self.activityIndicator.startAnimating()
+        }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let isomorphic = alg?.areIsomorphic() ?? false
+            let endTime = Date()
+            let timeInterval = endTime.timeIntervalSince(startTime)
+            
+            message = isomorphic ? "Grafovi su izomorfni!" : "Grafovi nisu izomorfni!"
+            message = "\(message!)\nVrijeme izvođenja: \(String(format: "%.5f", timeInterval)) sekundi"
+            
+            DispatchQueue.main.async {
+                self.dimmingOverlay.isHidden = true
+                self.activityIndicator.stopAnimating()
                 self.presentResultAlert(message: message)
                 self.resetViewController()
             }

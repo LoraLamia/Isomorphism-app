@@ -4,6 +4,8 @@ import PureLayout
 class DrawViewController: UIViewController {
     var graphCanvasView: GraphCanvasView!
     var checkButton: UIButton!
+    var activityIndicator: UIActivityIndicatorView!
+    var dimmingOverlay: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,16 @@ class DrawViewController: UIViewController {
         view.addSubview(checkButton)
         checkButton.addTarget(self, action: #selector(checkIsomorphism), for: .touchUpInside)
         navigationController?.navigationBar.tintColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
+        
+        dimmingOverlay = UIView()
+        dimmingOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+        dimmingOverlay.isHidden = true
+        view.addSubview(dimmingOverlay)
+        
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.color = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
     }
     
     func setupConstraints() {
@@ -38,54 +50,54 @@ class DrawViewController: UIViewController {
         checkButton.autoAlignAxis(toSuperviewAxis: .vertical)
         checkButton.autoPinEdge(.top, to: .bottom, of: graphCanvasView)
         checkButton.autoSetDimensions(to: CGSize(width: 200, height: 50))
+        
+        dimmingOverlay.autoPinEdgesToSuperviewEdges()
+        
+        activityIndicator.autoCenterInSuperview()
     }
     
     @objc func checkIsomorphism() {
         var alg: GraphIsomorphismAlgorithm?
-        var message: String?
         
         if !graphCanvasView.graphOne.isTree() && !graphCanvasView.graphTwo.isTree() {
             
             alg = AlgorithmCertificatesGraphs(graphOne: graphCanvasView.graphOne, graphTwo: graphCanvasView.graphTwo)
+            alertWindow(alg: alg)
             
-            let startTime = Date()
-            
-            DispatchQueue.global(qos: .userInitiated).async {
-                let isomorphic = alg?.areIsomorphic() ?? false
-                
-                let endTime = Date()
-                let timeInterval = endTime.timeIntervalSince(startTime)
-                
-                message = isomorphic ? "Grafovi su izomorfni!" : "Grafovi nisu izomorfni!"
-                message = "\(message!)\nVrijeme izvođenja: \(String(format: "%.5f", timeInterval)) sekundi"
-                
-                DispatchQueue.main.async {
-                    self.presentResultAlert(message: message)
-                    self.graphCanvasView.resetGraphs()
-                }
-            }
         } else if graphCanvasView.graphOne.isTree() && graphCanvasView.graphTwo.isTree(){
+            
             alg = AlgorithmCertificatesTrees(graphOne: graphCanvasView.graphOne, graphTwo: graphCanvasView.graphTwo)
+            alertWindow(alg: alg)
             
-            let startTime = Date()
-            
-            DispatchQueue.global(qos: .userInitiated).async {
-                let isomorphic = alg?.areIsomorphic() ?? false
-                
-                let endTime = Date()
-                let timeInterval = endTime.timeIntervalSince(startTime)
-                
-                message = isomorphic ? "Grafovi su izomorfni!" : "Grafovi nisu izomorfni!"
-                message = "\(message!)\nVrijeme izvođenja: \(String(format: "%.5f", timeInterval)) sekundi"
-                
-                DispatchQueue.main.async {
-                    self.presentResultAlert(message: message)
-                    self.graphCanvasView.resetGraphs()
-                }
-            }
         } else {
-            message = "Grafovi nisu izomorfni jer je jedan stablo, a drugi nije!"
+            var message = "Grafovi nisu izomorfni jer je jedan stablo, a drugi nije!"
             DispatchQueue.main.async {
+                self.presentResultAlert(message: message)
+                self.graphCanvasView.resetGraphs()
+            }
+        }
+    }
+    
+    private func alertWindow(alg: GraphIsomorphismAlgorithm?) {
+        let startTime = Date()
+        var message: String?
+        
+        DispatchQueue.main.async {
+            self.dimmingOverlay.isHidden = false
+            self.activityIndicator.startAnimating()
+        }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let isomorphic = alg?.areIsomorphic() ?? false
+            let endTime = Date()
+            let timeInterval = endTime.timeIntervalSince(startTime)
+            
+            message = isomorphic ? "Grafovi su izomorfni!" : "Grafovi nisu izomorfni!"
+            message = "\(message!)\nVrijeme izvođenja: \(String(format: "%.5f", timeInterval)) sekundi"
+            
+            DispatchQueue.main.async {
+                self.dimmingOverlay.isHidden = true
+                self.activityIndicator.stopAnimating()
                 self.presentResultAlert(message: message)
                 self.graphCanvasView.resetGraphs()
             }
@@ -100,7 +112,7 @@ class DrawViewController: UIViewController {
         let lines = message.components(separatedBy: "\n")
         
         let attributedMessage = NSMutableAttributedString()
-
+        
         if let firstLine = lines.first {
             let boldAttributes: [NSAttributedString.Key: Any] = [
                 .font: UIFont.boldSystemFont(ofSize: 20)
@@ -119,14 +131,14 @@ class DrawViewController: UIViewController {
             ]
             attributedMessage.append(NSAttributedString(string: lines[1], attributes: regularAttributes))
         }
-
+        
         alert.setValue(attributedMessage, forKey: "attributedMessage")
-
+        
         let okAction = UIAlertAction(title: "OK", style: .default)
         alert.addAction(okAction)
         
         alert.view.tintColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
-
+        
         self.present(alert, animated: true, completion: nil)
     }
     
