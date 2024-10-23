@@ -306,7 +306,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
             alertWindow(alg: alg)
             
         } else {
-            var message = "Grafovi nisu izomorfni jer je jedan stablo, a drugi nije!"
+            let message = "Grafovi nisu izomorfni jer je jedan stablo, a drugi nije!"
             DispatchQueue.main.async {
                 self.presentResultAlert(message: message)
                 self.resetViewController()
