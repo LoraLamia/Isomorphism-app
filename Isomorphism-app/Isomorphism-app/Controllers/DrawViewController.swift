@@ -17,7 +17,7 @@ class DrawViewController: UIViewController {
         
         view.backgroundColor = UIColor.white
         checkButton = UIButton()
-        checkButton.setTitle("Are isomorphic?", for: .normal)
+        checkButton.setTitle("Provjeri izomorfnost", for: .normal)
         checkButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         checkButton.backgroundColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
         checkButton.tintColor = UIColor.white
@@ -56,8 +56,8 @@ class DrawViewController: UIViewController {
                 let endTime = Date()
                 let timeInterval = endTime.timeIntervalSince(startTime)
                 
-                message = isomorphic ? "Graphs are isomorphic!" : "Graphs are NOT isomorphic!"
-                message = "\(message!)\nDetermination time: \(String(format: "%.5f", timeInterval)) seconds"
+                message = isomorphic ? "Grafovi su izomorfni!" : "Grafovi nisu izomorfni!"
+                message = "\(message!)\nVrijeme izvođenja: \(String(format: "%.5f", timeInterval)) sekundi"
                 
                 DispatchQueue.main.async {
                     self.presentResultAlert(message: message)
@@ -75,8 +75,8 @@ class DrawViewController: UIViewController {
                 let endTime = Date()
                 let timeInterval = endTime.timeIntervalSince(startTime)
                 
-                message = isomorphic ? "Graphs are isomorphic!" : "Graphs are NOT isomorphic!"
-                message = "\(message!)\nDetermination time: \(String(format: "%.5f", timeInterval)) seconds"
+                message = isomorphic ? "Grafovi su izomorfni!" : "Grafovi nisu izomorfni!"
+                message = "\(message!)\nVrijeme izvođenja: \(String(format: "%.5f", timeInterval)) sekundi"
                 
                 DispatchQueue.main.async {
                     self.presentResultAlert(message: message)
@@ -84,7 +84,7 @@ class DrawViewController: UIViewController {
                 }
             }
         } else {
-            message = "Graphs are NOT isomorphic because one is a Tree and other isn't!"
+            message = "Grafovi nisu izomorfni jer je jedan stablo, a drugi nije!"
             DispatchQueue.main.async {
                 self.presentResultAlert(message: message)
                 self.graphCanvasView.resetGraphs()

@@ -45,7 +45,7 @@ class WelcomeViewController: UIViewController {
         let barButton = UIBarButtonItem(customView: infoButton)
         self.navigationItem.rightBarButtonItem = barButton
         
-        welcomeLabel.text = "Choose the way of inserting your graphs!"
+        welcomeLabel.text = "Odaberi način na koji želiš unijeti svoje grafove!"
         welcomeLabel.textColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.3)
         welcomeLabel.font = UIFont.boldSystemFont(ofSize: 50)
         welcomeLabel.numberOfLines = 0
@@ -54,7 +54,7 @@ class WelcomeViewController: UIViewController {
         drawButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         drawButton.backgroundColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
         drawButton.layer.cornerRadius = 10
-        drawButton.setTitle("Draw graphs", for: .normal)
+        drawButton.setTitle("Grafički unos", for: .normal)
         drawButton.layer.shadowColor = UIColor.black.cgColor
         drawButton.layer.shadowOffset = CGSize(width: 0, height: 4)
         drawButton.layer.shadowRadius = 5
@@ -65,7 +65,7 @@ class WelcomeViewController: UIViewController {
         matrixButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         matrixButton.backgroundColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
         matrixButton.layer.cornerRadius = 10
-        matrixButton.setTitle("Insert graphs matrices", for: .normal)
+        matrixButton.setTitle("Unos matrica susjedstva", for: .normal)
         matrixButton.layer.shadowColor = UIColor.black.cgColor
         matrixButton.layer.shadowOffset = CGSize(width: 0, height: 4)
         matrixButton.layer.shadowRadius = 5

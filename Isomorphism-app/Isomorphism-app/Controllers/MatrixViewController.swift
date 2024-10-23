@@ -34,8 +34,8 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
     }
     
     func setupMatrixSizeFields() {
-        matrixSizeFieldOne = createMatrixSizeField(placeholder: "Enter size for graph 1")
-        matrixSizeFieldTwo = createMatrixSizeField(placeholder: "Enter size for graph 2")
+        matrixSizeFieldOne = createMatrixSizeField(placeholder: "Unesi dimenzije za graf 1")
+        matrixSizeFieldTwo = createMatrixSizeField(placeholder: "Unesi dimenzije za graf 2")
         
         scrollView.addSubview(matrixSizeFieldOne)
         scrollView.addSubview(matrixSizeFieldTwo)
@@ -51,7 +51,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         generateButton.backgroundColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
         generateButton.setTitleColor(.white, for: .normal)
         generateButton.layer.cornerRadius = 10
-        generateButton.setTitle("Generate matrix fields", for: .normal)
+        generateButton.setTitle("Generiraj matrice", for: .normal)
         generateButton.layer.shadowColor = UIColor.black.cgColor
         generateButton.layer.shadowOffset = CGSize(width: 0, height: 4)
         generateButton.layer.shadowRadius = 5
@@ -81,7 +81,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         
         textField.autoSetDimension(.height, toSize: 40)
         textField.autoSetDimension(.width, toSize: 220)
-        // Dodavanje senke za efekat lebdenja
+
         textField.layer.shadowColor = UIColor.black.cgColor
         textField.layer.shadowOffset = CGSize(width: 0, height: 2)
         textField.layer.shadowRadius = 4
@@ -100,7 +100,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         }
         
         if (sizeOne != sizeTwo) {
-            let message = "Adjacency matrices must have equal dimensions!"
+            let message = "Matrice susjedstva moraju imati jednake dimenzije!"
             let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
             
             let attributedMessage = NSMutableAttributedString(
@@ -123,7 +123,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
             return
         }
         if (sizeOne > 8 || sizeTwo > 8) {
-            let message = "This in an app for graphs with less than 9 vertices!"
+            let message = "Ovo je aplikacija za grafove sa maksimalno 8 vrhova!"
             let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
             
             let attributedMessage = NSMutableAttributedString(
@@ -186,7 +186,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
         processButton.backgroundColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
         processButton.setTitleColor(.white, for: .normal)
         processButton.layer.cornerRadius = 10
-        processButton.setTitle("Are isomorphic?", for: .normal)
+        processButton.setTitle("Provjeri izomorfnost", for: .normal)
         processButton.layer.shadowColor = UIColor.black.cgColor
         processButton.layer.shadowOffset = CGSize(width: 0, height: 4)
         processButton.layer.shadowRadius = 5
@@ -291,8 +291,8 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
                 let endTime = Date()
                 let timeInterval = endTime.timeIntervalSince(startTime)
                 
-                message = isomorphic ? "Graphs are isomorphic!" : "Graphs are NOT isomorphic!"
-                message = "\(message!)\nDetermination time: \(String(format: "%.5f", timeInterval)) seconds"
+                message = isomorphic ? "Grafovi su izomorfni!" : "Grafovi nisu izomorfni!"
+                message = "\(message!)\nVrijeme izvođenja: \(String(format: "%.5f", timeInterval)) sekundi"
                 
                 DispatchQueue.main.async {
                     self.presentResultAlert(message: message)
@@ -310,8 +310,8 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
                 let endTime = Date()
                 let timeInterval = endTime.timeIntervalSince(startTime)
                 
-                message = isomorphic ? "Graphs are isomorphic!" : "Graphs are NOT isomorphic!"
-                message = "\(message!)\nDetermination time: \(String(format: "%.5f", timeInterval)) seconds"
+                message = isomorphic ? "Grafovi su izomorfni!" : "Grafovi nisu izomorfni!"
+                message = "\(message!)\nVrijeme izvođenja: \(String(format: "%.5f", timeInterval)) sekundi"
                 
                 DispatchQueue.main.async {
                     self.presentResultAlert(message: message)
@@ -319,7 +319,7 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         } else {
-            message = "Graphs are NOT isomorphic because one is a Tree and other isn't!"
+            message = "Grafovi nisu izomorfni jer je jedan stablo, a drugi nije!"
             DispatchQueue.main.async {
                 self.presentResultAlert(message: message)
                 self.resetViewController()

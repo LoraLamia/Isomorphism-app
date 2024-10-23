@@ -160,14 +160,14 @@ class GraphCanvasView: UIView {
     }
     
     private func setupLabels() {
-        drawHereLabelTop.text = "Draw here"
+        drawHereLabelTop.text = "Ovdje nacrtaj graf"
         drawHereLabelTop.textAlignment = .center
         drawHereLabelTop.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
         drawHereLabelTop.font = UIFont.boldSystemFont(ofSize: 50)
         drawHereLabelTop.numberOfLines = 0
         addSubview(drawHereLabelTop)
 
-        drawHereLabelBottom.text = "Draw here"
+        drawHereLabelBottom.text = "Ovdje nacrtaj graf"
         drawHereLabelBottom.textAlignment = .center
         drawHereLabelBottom.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
         drawHereLabelBottom.font = UIFont.boldSystemFont(ofSize: 50)
