@@ -88,12 +88,38 @@ class DrawViewController: UIViewController {
         }
         
         DispatchQueue.global(qos: .userInitiated).async {
-            let isomorphic = alg?.areIsomorphic() ?? false
+            guard let alg = alg
+            else {
+                print("No algorithm available")
+                DispatchQueue.main.async {
+                    self.dimmingOverlay.isHidden = true
+                    self.activityIndicator.stopAnimating()
+                }
+                return
+            }
+            let isomorphic = alg.areIsomorphic()
             let endTime = Date()
             let timeInterval = endTime.timeIntervalSince(startTime)
             
+            var cert1: String = "N/A"
+            var cert2: String = "N/A"
+            
+            if let treeAlg = alg as? AlgorithmCertificatesTrees {
+                cert1 = treeAlg.cert1
+                cert2 = treeAlg.cert2
+            } else if let graphAlg = alg as? AlgorithmCertificatesGraphs {
+                cert1 = String(graphAlg.cert1)
+                cert2 = String(graphAlg.cert2)
+            }
+            
+            
             message = isomorphic ? "Grafovi su izomorfni!" : "Grafovi nisu izomorfni!"
-            message = "\(message!)\nVrijeme izvođenja: \(String(format: "%.5f", timeInterval)) sekundi"
+            message = """
+                    \(message!)
+                    Vrijeme izvođenja: \(String(format: "%.5f", timeInterval)) sekundi
+                    Certifikat grafa 1: \(cert1)
+                    Certifikat grafa 2: \(cert2)
+                    """
             
             DispatchQueue.main.async {
                 self.dimmingOverlay.isHidden = true
@@ -126,11 +152,13 @@ class DrawViewController: UIViewController {
         }
         
         if lines.count > 1 {
-            let regularAttributes: [NSAttributedString.Key: Any] = [
-                .font: UIFont.systemFont(ofSize: 18)
-            ]
-            attributedMessage.append(NSAttributedString(string: lines[1], attributes: regularAttributes))
-        }
+                for line in lines.dropFirst() {
+                    let regularAttributes: [NSAttributedString.Key: Any] = [
+                        .font: UIFont.systemFont(ofSize: 18)
+                    ]
+                    attributedMessage.append(NSAttributedString(string: line + "\n", attributes: regularAttributes))
+                }
+            }
         
         alert.setValue(attributedMessage, forKey: "attributedMessage")
         
@@ -139,7 +167,9 @@ class DrawViewController: UIViewController {
         
         alert.view.tintColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
         
-        self.present(alert, animated: true, completion: nil)
+        DispatchQueue.main.async {
+                self.present(alert, animated: true, completion: nil)
+            }
     }
     
 }

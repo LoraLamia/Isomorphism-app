@@ -4,15 +4,21 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
     
     var graphOne: Graph
     var graphTwo: Graph
+    var cert1: Int
+    var cert2: Int
     
     init(graphOne: Graph, graphTwo: Graph) {
         self.graphOne = graphOne
         self.graphTwo = graphTwo
+        cert1 = 0
+        cert2 = 0
     }
     
     func areIsomorphic() -> Bool {
         let v1 = cert(G: graphOne)
+        self.cert1 = v1
         let v2 = cert(G: graphTwo)
+        self.cert2 = v2
         return v1 == v2
     }
     

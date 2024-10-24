@@ -9,16 +9,22 @@ class AlgorithmCertificatesTrees: GraphIsomorphismAlgorithm {
     var graphOne: Graph
     var graphTwo: Graph
     var isomorphic: Bool = true
+    var cert1: String
+    var cert2: String
     
     init(graphOne: Graph, graphTwo: Graph) {
         self.graphOne = graphOne
         self.graphTwo = graphTwo
+        cert1 = ""
+        cert2 = ""
     }
     
     func calculateCertificatesTrees() -> (String, String) {
         var certs = ("", "")
         certs.0 = calculateCertficate(graph: graphOne)
+        cert1 = certs.0
         certs.1 = calculateCertficate(graph: graphTwo)
+        cert2 = certs.1
         
         return certs
     }
