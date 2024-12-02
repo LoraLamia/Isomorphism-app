@@ -49,6 +49,14 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
         while !S.isEmpty {
             T = S.removeFirst()
             
+            print("Current T:", T.map { $0.id })
+            
+            // Ispisuje trenutnu vrijednost B s id-evima vrhova u svakom bloku
+            print("Current B:", B.map { block in block.map { $0.id } })
+            
+            // Ispisuje trenutnu vrijednost S s id-evima vrhova u svakom bloku
+            print("Current S:", S.map { block in block.map { $0.id } })
+            
             for (i, block) in B.enumerated() {
                 var L = Array(repeating: [Vertex](), count: G.vertices.count)
                 
@@ -76,8 +84,12 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
                     }
                 }
             }
+            print("Updated B after processing T:", B.map { block in block.map { $0.id } })
+            print("Updated S after processing T:", S.map { block in block.map { $0.id } })
+            print("---------------------------------------------------")
         }
         
+        print("Final B:", B.map { block in block.map { $0.id } })
         return B
     }
     
@@ -114,7 +126,7 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
                     break
                 }
             }
-
+            
             let Res = compare(G: G, μ: bestOrdering, π: pi1, n: pi1.count)
             
             if Res == .worse {
@@ -156,7 +168,7 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
         
         return (bestOrdering, bestExists)
     }
-
+    
     
     
     func cert(G: Graph) -> Int {
@@ -168,14 +180,14 @@ class AlgorithmCertificatesGraphs: GraphIsomorphismAlgorithm {
         for j in (1..<G.vertices.count).reversed() {
             for i in (0..<j).reversed() {
                 if G.areAdjacent(finalOrdering[i][0], finalOrdering[j][0]) {
-                    C += 1 << k 
+                    C += 1 << k
                 }
                 k += 1
             }
         }
         return C
     }
-
+    
     
 }
 

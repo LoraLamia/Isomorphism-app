@@ -91,7 +91,7 @@ class AlgorithmCertificatesTrees: GraphIsomorphismAlgorithm {
     
     func areIsomorphic() -> Bool {
         let cert = calculateCertificatesTrees()
-        
+        print(cert.0)
         return cert.0 == cert.1
     }
 }

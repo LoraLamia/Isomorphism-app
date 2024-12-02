@@ -57,6 +57,14 @@ class DrawViewController: UIViewController {
     }
     
     @objc func checkIsomorphism() {
+        if graphCanvasView.graphOne.vertices.isEmpty || graphCanvasView.graphTwo.vertices.isEmpty {
+                let message = "Unesite oba grafa prije provjere izomorfnosti!"
+                DispatchQueue.main.async {
+                    self.presentResultAlert(message: message)
+                }
+                return
+            }
+        
         var alg: GraphIsomorphismAlgorithm?
         
         if !graphCanvasView.graphOne.isTree() && !graphCanvasView.graphTwo.isTree() {
