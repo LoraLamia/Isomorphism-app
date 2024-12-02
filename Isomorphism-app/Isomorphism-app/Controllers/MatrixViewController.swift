@@ -162,6 +162,30 @@ class MatrixViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
+        if ((sizeOne == 0 && sizeTwo == 0) || (sizeOne < 0 || sizeTwo < 0)) {
+            let message = "Unesite dimenzije matrica veće od 0!"
+            let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+            
+            let attributedMessage = NSMutableAttributedString(
+                string: message,
+                attributes: [
+                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)
+                ]
+            )
+            alert.setValue(attributedMessage, forKey: "attributedMessage")
+            alert.view.tintColor = UIColor(red: 22/255, green: 93/255, blue: 160/255, alpha: 0.8)
+            
+            let okAction = UIAlertAction(title: "OK", style: .default) { [weak self] _ in
+                self?.resetViewController()
+            }
+            
+            alert.addAction(okAction)
+            
+            self.present(alert, animated: true, completion: nil)
+            
+            return
+        }
+        
         generateButton.isHidden = true
         
         inputMatrixViewOne = createMatrixInputFields(size: sizeOne, tag: 100)

@@ -58,12 +58,20 @@ class DrawViewController: UIViewController {
     
     @objc func checkIsomorphism() {
         if graphCanvasView.graphOne.vertices.isEmpty || graphCanvasView.graphTwo.vertices.isEmpty {
-                let message = "Unesite oba grafa prije provjere izomorfnosti!"
-                DispatchQueue.main.async {
-                    self.presentResultAlert(message: message)
-                }
-                return
+            let message = "Unesite oba grafa prije provjere izomorfnosti!"
+            DispatchQueue.main.async {
+                self.presentResultAlert(message: message)
             }
+            return
+        }
+        if graphCanvasView.graphOne.vertices.count > 8 || graphCanvasView.graphTwo.vertices.count > 8 {
+            let message = "Ovo je aplikacija za grafove sa maksimalno 8 vrhova!"
+            DispatchQueue.main.async {
+                self.presentResultAlert(message: message)
+            }
+            self.graphCanvasView.resetGraphs()
+            return
+        }
         
         var alg: GraphIsomorphismAlgorithm?
         
