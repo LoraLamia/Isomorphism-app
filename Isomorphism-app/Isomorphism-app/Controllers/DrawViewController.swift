@@ -73,6 +73,15 @@ class DrawViewController: UIViewController {
             return
         }
         
+        if graphCanvasView.graphOne.vertices.count != graphCanvasView.graphTwo.vertices.count {
+            let message = "Grafovi nisu izomorfni jer imaju različit broj vrhova!"
+            DispatchQueue.main.async {
+                self.presentResultAlert(message: message)
+            }
+            self.graphCanvasView.resetGraphs()
+            return
+        }
+        
         var alg: GraphIsomorphismAlgorithm?
         
         if !graphCanvasView.graphOne.isTree() && !graphCanvasView.graphTwo.isTree() {
